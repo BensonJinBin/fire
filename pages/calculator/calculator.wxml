@@ -1,0 +1,69 @@
+<!-- pages/calculator/calculator.wxml -->
+<view class="container">
+  <!-- 自定义顶部区域，用于适配安全区域 -->
+  <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
+  <view class="custom-nav">
+    <text class="nav-title">Fire计算器</text>
+  </view>
+  
+  <view class="form">
+    <view class="input-group">
+      <text class="label">年初本金 (元)</text>
+      <input class="input" type="digit" placeholder="请输入年初本金" bindinput="onPrincipalInput" value="{{principal}}" />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">年收入 (元)</text>
+      <input class="input" type="digit" placeholder="请输入年收入" bindinput="onIncomeInput" value="{{income}}" />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">年支出 (元)</text>
+      <input class="input" type="digit" placeholder="请输入年支出" bindinput="onExpenseInput" value="{{expense}}" />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">年投资回报率 (%)</text>
+      <input class="input" type="digit" placeholder="请输入年投资回报率" bindinput="onInterestRateInput" value="{{interestRate}}" />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">通胀率 (%)</text>
+      <input class="input" type="digit" placeholder="请输入通胀率" bindinput="onInflationRateInput" value="{{inflationRate}}" />
+    </view>
+    
+    <view class="input-group">
+      <text class="label">计算年数</text>
+      <input class="input" type="number" placeholder="请输入计算年数" bindinput="onYearsInput" value="{{years}}" />
+    </view>
+    
+    <button class="calculate-btn" bindtap="calculate">开始计算</button>
+  </view>
+  
+  <view class="results" wx:if="{{results.length > 0}}">
+    <text class="results-title">计算结果</text>
+    <view class="table-container">
+      <view class="table-header">
+        <text class="col-year">年份</text>
+        <text class="col-expense">年支出</text>
+        <text class="col-interest">年利息</text>
+        <text class="col-principal">本金</text>
+      </view>
+      <view class="table-body">
+        <view class="table-row" wx:for="{{results}}" wx:key="index">
+          <text class="col-year">{{item.year}}</text>
+          <text class="col-expense">{{item.expense}}</text>
+          <text class="col-interest">{{item.interest}}</text>
+          <text class="col-principal">{{item.principal}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="analysis" wx:if="{{results.length > 0}}">
+      <text class="analysis-title">分析与建议</text>
+      <view wx:for="{{analysis}}" wx:key="index" class="analysis-item">
+        <text class="analysis-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,102 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 0;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.status-bar {
+  width: 100%;
+  background-color: #fff;
+}
+
+.custom-nav {
+  text-align: center;
+  padding: 20rpx 20rpx 40rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.intro {
+  background: white;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+  margin-top: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.intro-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info-section {
+  background: white;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+  margin-top: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.info-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.info-text {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.start-btn {
+  background-color: #007aff;
+  color: white;
+  border-radius: 50rpx;
+  padding: 20rpx;
+  font-size: 32rpx;
+  margin: 20rpx;
+  border: none;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.start-btn:active {
+  background-color: #0062cc;
+}
+
+.info-btn {
+  background-color: #fff;
+  color: #007aff;
+  border-radius: 50rpx;
+  padding: 20rpx;
+  font-size: 32rpx;
+  margin: 20rpx;
+  border: 1rpx solid #007aff;
+  display: block;
+}
+
+.info-btn:active {
+  background-color: #f0f9ff;
+}

@@ -1,0 +1,33 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 自定义顶部区域，用于适配安全区域 -->
+  <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
+  <view class="custom-nav">
+    <text class="title">Fire计算器</text>
+    <text class="subtitle">财务独立计算器</text>
+  </view>
+  
+  <view class="intro">
+    <text class="intro-text">Fire (Financial Independence, Retire Early) 是一种财务独立、提前退休的生活方式。通过计算您的收入、支出和投资回报，帮助您规划财务独立之路。</text>
+  </view>
+  
+  <view class="info-section">
+    <text class="info-title">什么是Fire</text>
+    <text class="info-text">Fire概念源于美国，目标是通过高储蓄率和聪明的投资实现财务独立，从而可以选择提前退休或从事自己真正热爱的工作。一般认为，当你的投资组合产生的被动收入能够覆盖你的生活支出时，就达到了Fire状态。</text>
+  </view>
+  
+  <view class="info-section">
+    <text class="info-title">通胀率参考</text>
+    <text class="info-text">中国近十年通胀率平均在 2.229% 左右，计算时需要考虑通胀对购买力的影响</text>
+  </view>
+  
+  <view class="info-section">
+    <text class="info-title">计算公式</text>
+    <text class="info-text">年末本金 = 年初本金 - 年消费 + 年利息 + 年收入</text>
+    <text class="info-text">其中年利息 = 年初本金 × 年投资回报率</text>
+    <text class="info-text">年消费会随着通胀率逐年增长</text>
+  </view>
+  
+  <button class="start-btn" bindtap="startCalculator">开始计算</button>
+  <button class="info-btn" bindtap="goToAbout">了解更多</button>
+</view>
