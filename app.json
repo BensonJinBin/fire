@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/calculator/calculator",
-    "pages/about/about"
+    "pages/profile/profile"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,15 +18,21 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "icons/home.png",
+        "selectedIconPath": "icons/home_selected.png"
       },
       {
         "pagePath": "pages/calculator/calculator",
-        "text": "计算器"
+        "text": "计算器",
+        "iconPath": "icons/calculator.png",
+        "selectedIconPath": "icons/calculator_selected.png"
       },
       {
-        "pagePath": "pages/about/about",
-        "text": "关于"
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "icons/profile.png",
+        "selectedIconPath": "icons/profile_selected.png"
       }
     ]
   },

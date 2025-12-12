@@ -1,0 +1,235 @@
+/* 全局样式 - app.wxss */
+
+/* 主题颜色定义 */
+page {
+  --primary-color: #007aff;
+  --primary-light: #5a9cff;
+  --primary-dark: #0051a2;
+  --secondary-color: #f0f7ff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-tertiary: #888;
+  --background-color: #f5f7fa;
+  --card-background: #ffffff;
+  --border-color: #f0f0f0;
+  --shadow: 0 6rpx 20rpx rgba(0,0,0,0.05);
+}
+
+/* 通用样式 */
+.container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  min-height: 100vh;
+}
+
+.status-bar {
+  width: 100%;
+  background-color: #fff;
+}
+
+.custom-nav {
+  background-color: #fff;
+  padding: 20rpx 20rpx 30rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.nav-title, .title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 6rpx;
+  display: block;
+}
+
+/* 卡片样式 */
+.card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.05);
+  border: 1rpx solid #f0f0f0;
+}
+
+.card-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-bottom: 10rpx;
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, #007aff, #5a9cff);
+  border-radius: 2rpx;
+}
+
+.card-content {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.7;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+/* 按钮样式 */
+.primary-btn {
+  background: linear-gradient(135deg, #007aff 0%, #0051a2 100%);
+  color: white;
+  border-radius: 50rpx;
+  padding: 25rpx;
+  font-size: 32rpx;
+  margin: 0 auto;
+  border: none;
+  display: block;
+  width: 90%;
+  max-width: 400rpx;
+  box-shadow: 0 6rpx 15rpx rgba(0, 122, 255, 0.3);
+}
+
+.primary-btn:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.secondary-btn {
+  background-color: #fff;
+  color: #007aff;
+  border-radius: 50rpx;
+  padding: 25rpx;
+  font-size: 32rpx;
+  margin: 0 auto;
+  border: 1rpx solid #007aff;
+  display: block;
+  width: 90%;
+  max-width: 400rpx;
+}
+
+.secondary-btn:active {
+  background-color: #f0f9ff;
+  transform: scale(0.98);
+}
+
+/* 文本样式 */
+.text-primary {
+  color: #333;
+}
+
+.text-secondary {
+  color: #666;
+}
+
+.text-tertiary {
+  color: #888;
+}
+
+.text-accent {
+  color: #007aff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* 布局样式 */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 间距样式 */
+.mt-10 { margin-top: 10rpx; }
+.mt-20 { margin-top: 20rpx; }
+.mt-30 { margin-top: 30rpx; }
+.mt-40 { margin-top: 40rpx; }
+
+.mb-10 { margin-bottom: 10rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.mb-30 { margin-bottom: 30rpx; }
+.mb-40 { margin-bottom: 40rpx; }
+
+.ml-10 { margin-left: 10rpx; }
+.ml-20 { margin-left: 20rpx; }
+.ml-30 { margin-left: 30rpx; }
+.ml-40 { margin-left: 40rpx; }
+
+.mr-10 { margin-right: 10rpx; }
+.mr-20 { margin-right: 20rpx; }
+.mr-30 { margin-right: 30rpx; }
+.mr-40 { margin-right: 40rpx; }
+
+.p-10 { padding: 10rpx; }
+.p-20 { padding: 20rpx; }
+.p-30 { padding: 30rpx; }
+.p-40 { padding: 40rpx; }
+
+/* 表单样式 */
+.input-group {
+  margin-bottom: 35rpx;
+}
+
+.input-label-container {
+  margin-bottom: 12rpx;
+}
+
+.label {
+  display: block;
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.input-hint {
+  display: block;
+  font-size: 24rpx;
+  color: #888;
+}
+
+.input {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  background-color: #fafafa;
+}
+
+.input:focus {
+  border-color: #007aff;
+  background-color: #fff;
+  box-shadow: 0 0 0 2rpx rgba(0, 122, 255, 0.2);
+}

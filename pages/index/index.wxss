@@ -79,11 +79,15 @@
   margin: 20rpx;
   border: none;
   display: block;
-  margin-bottom: 20rpx;
+  margin-bottom: 60rpx;
 }
 
 .start-btn:active {
   background-color: #0062cc;
+}
+
+.button-spacing {
+  height: 20rpx;
 }
 
 .info-btn {

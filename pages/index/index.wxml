@@ -13,21 +13,37 @@
   
   <view class="info-section">
     <text class="info-title">什么是Fire</text>
-    <text class="info-text">Fire概念源于美国，目标是通过高储蓄率和聪明的投资实现财务独立，从而可以选择提前退休或从事自己真正热爱的工作。一般认为，当你的投资组合产生的被动收入能够覆盖你的生活支出时，就达到了Fire状态。</text>
+    <text class="info-text">Fire是Financial Independence, Retire Early的缩写，意为"财务独立，提前退休"。这是一种生活理念和财务规划策略，旨在通过高储蓄率和明智的投资，使被动收入能够覆盖日常开支，从而实现提前退休或选择自己热爱的工作。</text>
   </view>
   
   <view class="info-section">
-    <text class="info-title">通胀率参考</text>
-    <text class="info-text">中国近十年通胀率平均在 2.229% 左右，计算时需要考虑通胀对购买力的影响</text>
+    <text class="info-title">Fire的原理</text>
+    <text class="info-text">Fire的核心在于：被动收入 ≥ 生活支出。当你的投资组合（如股票、债券、房地产等）产生的被动收入能够覆盖你的生活支出时，你就达到了Fire状态，可以选择不再为了生计而工作。</text>
   </view>
   
   <view class="info-section">
     <text class="info-title">计算公式</text>
-    <text class="info-text">年末本金 = 年初本金 - 年消费 + 年利息 + 年收入</text>
-    <text class="info-text">其中年利息 = 年初本金 × 年投资回报率</text>
-    <text class="info-text">年消费会随着通胀率逐年增长</text>
+    <text class="info-text">本计算器使用的计算公式为：</text>
+    <text class="info-text">• 年末本金 = 年初本金 - 年消费 + 年利息 + 年收入</text>
+    <text class="info-text">• 年利息 = 年初本金 × 年投资回报率</text>
+    <text class="info-text">• 年消费会随着通胀率逐年增长</text>
+  </view>
+  
+  <view class="info-section">
+    <text class="info-title">Fire的实现路径</text>
+    <text class="info-text">1. 提高储蓄率：通过控制支出和增加收入来提高储蓄率</text>
+    <text class="info-text">2. 投资理财：将储蓄投资于能够产生被动收入的资产</text>
+    <text class="info-text">3. 长期复利：利用时间的力量，让投资收益再投资</text>
+    <text class="info-text">4. 控制通胀影响：考虑通胀对购买力的侵蚀</text>
+  </view>
+  
+  <view class="info-section">
+    <text class="info-title">参考数据</text>
+    <text class="info-text">• 中国近十年通胀率平均在 2.229% 左右</text>
+    <text class="info-text">• 长期股票市场平均年化收益率约为 7-10%</text>
+    <text class="info-text">• 债券市场平均年化收益率约为 3-5%</text>
   </view>
   
   <button class="start-btn" bindtap="startCalculator">开始计算</button>
-  <button class="info-btn" bindtap="goToAbout">了解更多</button>
+  <view class="button-spacing"></view>
 </view>

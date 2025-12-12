@@ -19,9 +19,9 @@ Page({
     })
   },
   
-  goToAbout: function() {
+  goToProfile: function() {
     wx.switchTab({
-      url: '/pages/about/about'
+      url: '/pages/profile/profile'
     })
   }
 })

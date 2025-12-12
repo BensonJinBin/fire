@@ -1,12 +1,17 @@
-<!-- pages/about/about.wxml -->
+<!-- pages/profile/profile.wxml -->
 <view class="container">
   <!-- 自定义顶部区域，用于适配安全区域 -->
   <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
   <view class="custom-nav">
-    <text class="nav-title">关于Fire</text>
+    <text class="nav-title">我的</text>
   </view>
   
   <view class="content">
+    <view class="section">
+      <text class="section-title">Fire计算器</text>
+      <text class="section-text">一个帮助您规划财务独立之路的工具</text>
+    </view>
+    
     <view class="section">
       <text class="section-title">什么是Fire</text>
       <text class="section-text">Fire是Financial Independence, Retire Early的缩写，意为"财务独立，提前退休"。这是一种生活理念和财务规划策略，旨在通过高储蓄率和明智的投资，使被动收入能够覆盖日常开支，从而实现提前退休或选择自己热爱的工作。</text>
