@@ -7,14 +7,13 @@
 
 .status-bar {
   width: 100%;
-  background-color: #fff;
+  background-color: #D0F070;
 }
 
 .custom-nav {
   background-color: #D0F070;
   padding: 20rpx 20rpx 30rpx;
   text-align: center;
-  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
 }
 
 .nav-title {
