@@ -14,13 +14,19 @@ Page({
   },
   
   startCalculator: function() {
-    wx.switchTab({
+    wx.redirectTo({
       url: '/pages/calculator/calculator'
     })
   },
   
-  goToProfile: function() {
-    wx.switchTab({
+  navigateToCalculator: function() {
+    wx.redirectTo({
+      url: '/pages/calculator/calculator'
+    })
+  },
+  
+  navigateToProfile: function() {
+    wx.redirectTo({
       url: '/pages/profile/profile'
     })
   }

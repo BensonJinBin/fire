@@ -233,3 +233,51 @@ page {
   background-color: #fff;
   box-shadow: 0 0 0 2rpx rgba(0, 122, 255, 0.2);
 }
+
+/* 自定义底部导航栏样式 */
+.custom-bottom-nav {
+  position: fixed;
+  bottom: 30rpx;
+  left: 30rpx;
+  right: 30rpx;
+  background-color: #FFF8E1;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 0;
+  z-index: 1000;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #8D6E63;
+  font-size: 24rpx;
+  padding: 5rpx;
+  transition: all 0.3s ease;
+}
+
+.nav-item.active {
+  color: #000;
+}
+
+.nav-item .nav-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 5rpx;
+}
+
+.nav-item .nav-text {
+  font-size: 20rpx;
+  line-height: 1;
+}
+
+/* 页面内容区域，为底部导航留出空间 */
+.page-content {
+  padding-bottom: 160rpx;
+}

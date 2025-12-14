@@ -15,5 +15,17 @@ Page({
   
   onShow: function() {
     // 页面显示时可能需要执行的逻辑
+  },
+  
+  navigateToIndex: function() {
+    wx.redirectTo({
+      url: '/pages/index/index'
+    });
+  },
+  
+  navigateToCalculator: function() {
+    wx.redirectTo({
+      url: '/pages/calculator/calculator'
+    });
   }
 })

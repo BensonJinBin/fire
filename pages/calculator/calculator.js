@@ -172,5 +172,19 @@ Page({
     analysis.push('建议：提高储蓄率、优化投资组合、控制生活成本，有助于更快实现Fire目标。');
     
     return analysis;
+  },
+  
+  // 导航到首页
+  navigateToIndex: function() {
+    wx.redirectTo({
+      url: '/pages/index/index'
+    });
+  },
+  
+  // 导航到个人页面
+  navigateToProfile: function() {
+    wx.redirectTo({
+      url: '/pages/profile/profile'
+    });
   }
 })
