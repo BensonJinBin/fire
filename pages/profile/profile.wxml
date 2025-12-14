@@ -3,7 +3,7 @@
   <!-- 自定义顶部区域，用于适配安全区域 -->
   <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
   <view class="custom-nav">
-    <text class="nav-title">FIRE计算器</text>
+    <text class="nav-title">Fire计算器</text>
   </view>
   
   <view class="content">
