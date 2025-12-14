@@ -37,7 +37,7 @@
       <input class="input" type="number" placeholder="请输入计算年数" bindinput="onYearsInput" value="{{years}}" />
     </view>
     
-    <button class="calculate-btn" bindtap="calculate">开始计算</button>
+    <view class="calculate-btn" bindtap="calculate">开始计算</view>
   </view>
   
   <view class="results" wx:if="{{results.length > 0}}">
