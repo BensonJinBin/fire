@@ -27,5 +27,13 @@ Page({
     wx.redirectTo({
       url: '/pages/calculator/calculator'
     });
+  },
+  
+  onShareAppMessage: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      path: '/pages/profile/profile',
+      imageUrl: '/icons/profile.png' // 可以替换为分享时显示的图片
+    };
   }
 })

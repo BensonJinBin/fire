@@ -7,42 +7,38 @@
   </view>
   
   <view class="content">
-    <view class="section">
-      <text class="section-title">Fire计算器</text>
-      <text class="section-text">一个帮助您规划财务独立之路的工具</text>
+    <!-- 分享模块 -->
+    <view class="card">
+      <view class="share-section">
+        <text class="section-title">分享</text>
+        <view class="share-content">
+          <text class="share-text">觉得这个App不错？马上分享给大家！</text>
+          <button class="share-btn" open-type="share">
+            <image class="share-icon-img" src="/icons/share.svg" mode="scaleToFill"></image>
+          </button>
+        </view>
+      </view>
     </view>
     
-    <view class="section">
-      <text class="section-title">什么是Fire</text>
-      <text class="section-text">Fire是Financial Independence, Retire Early的缩写，意为"财务独立，提前退休"。这是一种生活理念和财务规划策略，旨在通过高储蓄率和明智的投资，使被动收入能够覆盖日常开支，从而实现提前退休或选择自己热爱的工作。</text>
-    </view>
-    
-    <view class="section">
-      <text class="section-title">Fire的原理</text>
-      <text class="section-text">Fire的核心在于：被动收入 ≥ 生活支出。当你的投资组合（如股票、债券、房地产等）产生的被动收入能够覆盖你的生活支出时，你就达到了Fire状态，可以选择不再为了生计而工作。</text>
-    </view>
-    
-    <view class="section">
-      <text class="section-title">计算公式</text>
-      <text class="section-text">本计算器使用的计算公式为：</text>
-      <text class="section-text">• 年末本金 = 年初本金 - 年消费 + 年利息 + 年收入</text>
-      <text class="section-text">• 年利息 = 年初本金 × 年投资回报率</text>
-      <text class="section-text">• 年消费会随着通胀率逐年增长</text>
-    </view>
-    
-    <view class="section">
-      <text class="section-title">Fire的实现路径</text>
-      <text class="section-text">1. 提高储蓄率：通过控制支出和增加收入来提高储蓄率</text>
-      <text class="section-text">2. 投资理财：将储蓄投资于能够产生被动收入的资产</text>
-      <text class="section-text">3. 长期复利：利用时间的力量，让投资收益再投资</text>
-      <text class="section-text">4. 控制通胀影响：考虑通胀对购买力的侵蚀</text>
-    </view>
-    
-    <view class="section">
-      <text class="section-title">参考数据</text>
-      <text class="section-text">• 中国近十年通胀率平均在 2.229% 左右</text>
-      <text class="section-text">• 长期股票市场平均年化收益率约为 7-10%</text>
-      <text class="section-text">• 债券市场平均年化收益率约为 3-5%</text>
+    <!-- 功能说明模块 -->
+    <view class="card">
+      <view class="features-section">
+        <text class="section-title">功能说明</text>
+        <view class="features-list">
+          <view class="feature-item">
+            <text class="feature-title">- 开支推算</text>
+            <text class="feature-desc">计算退休资金可支撑年数，或推算所需最小退休资金</text>
+          </view>
+          <view class="feature-item">
+            <text class="feature-title">- 储蓄计划</text>
+            <text class="feature-desc">制定FIRE目标达成计划，计算所需储蓄年数</text>
+          </view>
+          <view class="feature-item">
+            <text class="feature-title">- 图表分析</text>
+            <text class="feature-desc">可视化展示资金变化趋势和年度详情</text>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>
