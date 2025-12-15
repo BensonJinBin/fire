@@ -19,6 +19,8 @@
         </view>
       </view>
     </view>
+
+    <ad unit-id="adunit-5c28703d6d3e2c5b" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
     
     <!-- 功能说明模块 -->
     <view class="card">
