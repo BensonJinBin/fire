@@ -38,6 +38,7 @@
     </view>
     
     <view class="calculate-btn" bindtap="calculate">开始计算</view>
+    <view class="clear-btn" bindtap="clearInputs">清空输入</view>
   </view>
   
   <view class="results" wx:if="{{results.length > 0}}">

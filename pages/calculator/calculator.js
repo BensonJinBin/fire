@@ -30,9 +30,30 @@ Page({
     // 获取系统信息以适配不同设备的状态栏高度
     const systemInfo = wx.getSystemInfoSync();
     const statusBarHeight = systemInfo.statusBarHeight || 20;
-    this.setData({
-      statusBarHeight: statusBarHeight
-    });
+    
+    // 尝试从本地存储恢复用户输入的值
+    const savedData = wx.getStorageSync('calculatorData');
+    if (savedData) {
+      this.setData({
+        principal: savedData.principal || this.data.defaultPrincipal,
+        income: savedData.income || this.data.defaultIncome,
+        expense: savedData.expense || this.data.defaultExpense,
+        interestRate: savedData.interestRate || this.data.defaultInterestRate,
+        inflationRate: savedData.inflationRate || this.data.defaultInflationRate,
+        years: savedData.years || this.data.defaultYears,
+        principalInputClass: (savedData.principal !== this.data.defaultPrincipal && savedData.principal) ? 'input' : 'input input-default',
+        incomeInputClass: (savedData.income !== this.data.defaultIncome && savedData.income) ? 'input' : 'input input-default',
+        expenseInputClass: (savedData.expense !== this.data.defaultExpense && savedData.expense) ? 'input' : 'input input-default',
+        interestRateInputClass: (savedData.interestRate !== this.data.defaultInterestRate && savedData.interestRate) ? 'input' : 'input input-default',
+        inflationRateInputClass: (savedData.inflationRate !== this.data.defaultInflationRate && savedData.inflationRate) ? 'input' : 'input input-default',
+        yearsInputClass: (savedData.years !== this.data.defaultYears && savedData.years) ? 'input' : 'input input-default',
+        statusBarHeight: statusBarHeight
+      });
+    } else {
+      this.setData({
+        statusBarHeight: statusBarHeight
+      });
+    }
   },
   
   onShow: function() {
@@ -40,38 +61,50 @@ Page({
   },
   
   onPrincipalInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      principal: e.detail.value
+      principal: value,
+      principalInputClass: value === this.data.defaultPrincipal || !value ? 'input input-default' : 'input'
     })
   },
   
   onIncomeInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      income: e.detail.value
+      income: value,
+      incomeInputClass: value === this.data.defaultIncome || !value ? 'input input-default' : 'input'
     })
   },
   
   onExpenseInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      expense: e.detail.value
+      expense: value,
+      expenseInputClass: value === this.data.defaultExpense || !value ? 'input input-default' : 'input'
     })
   },
   
   onInterestRateInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      interestRate: e.detail.value
+      interestRate: value,
+      interestRateInputClass: value === this.data.defaultInterestRate || !value ? 'input input-default' : 'input'
     })
   },
   
   onInflationRateInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      inflationRate: e.detail.value
+      inflationRate: value,
+      inflationRateInputClass: value === this.data.defaultInflationRate || !value ? 'input input-default' : 'input'
     })
   },
   
   onYearsInput: function(e) {
+    const value = e.detail.value;
     this.setData({
-      years: e.detail.value
+      years: value,
+      yearsInputClass: value === this.data.defaultYears || !value ? 'input input-default' : 'input'
     })
   },
   
@@ -298,8 +331,25 @@ Page({
       expense: finalExpense,
       interestRate: finalInterestRate,
       inflationRate: finalInflationRate,
-      years: finalYears
+      years: finalYears,
+      principalInputClass: finalPrincipal !== this.data.defaultPrincipal ? 'input' : 'input input-default',
+      incomeInputClass: finalIncome !== this.data.defaultIncome ? 'input' : 'input input-default',
+      expenseInputClass: finalExpense !== this.data.defaultExpense ? 'input' : 'input input-default',
+      interestRateInputClass: finalInterestRate !== this.data.defaultInterestRate ? 'input' : 'input input-default',
+      inflationRateInputClass: finalInflationRate !== this.data.defaultInflationRate ? 'input' : 'input input-default',
+      yearsInputClass: finalYears !== this.data.defaultYears ? 'input' : 'input input-default'
     });
+    
+    // 保存用户输入的数据到本地存储
+    const calculatorData = {
+      principal: finalPrincipal,
+      income: finalIncome,
+      expense: finalExpense,
+      interestRate: finalInterestRate,
+      inflationRate: finalInflationRate,
+      years: finalYears
+    };
+    wx.setStorageSync('calculatorData', calculatorData);
     
     wx.showToast({
       title: '计算完成',
@@ -363,6 +413,42 @@ Page({
   navigateToProfile: function() {
     wx.redirectTo({
       url: '/pages/profile/profile'
+    });
+  },
+  
+  clearInputs: function() {
+    wx.showModal({
+      title: '确认清空',
+      content: '确定要清空所有输入并恢复默认值吗？',
+      success: (res) => {
+        if (res.confirm) {
+          // 清空本地存储
+          wx.removeStorageSync('calculatorData');
+          
+          // 恢复默认值和样式
+          this.setData({
+            principal: this.data.defaultPrincipal,
+            income: this.data.defaultIncome,
+            expense: this.data.defaultExpense,
+            interestRate: this.data.defaultInterestRate,
+            inflationRate: this.data.defaultInflationRate,
+            years: this.data.defaultYears,
+            principalInputClass: 'input input-default',
+            incomeInputClass: 'input input-default',
+            expenseInputClass: 'input input-default',
+            interestRateInputClass: 'input input-default',
+            inflationRateInputClass: 'input input-default',
+            yearsInputClass: 'input input-default',
+            results: [],
+            analysis: []
+          });
+          
+          wx.showToast({
+            title: '已清空',
+            icon: 'success'
+          });
+        }
+      }
     });
   }
 })

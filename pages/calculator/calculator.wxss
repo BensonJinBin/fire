@@ -76,6 +76,25 @@
   background-color: #C0E65C;
 }
 
+.clear-btn {
+  background-color: #f8f8f8;
+  color: #000;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  height: 80rpx;
+  font-size: 28rpx;
+  margin: 20rpx 0 0 0;
+  border: none;
+  box-sizing: border-box;
+  line-height: 80rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.clear-btn:active {
+  background-color: #e0e0e0;
+}
+
 .results {
   background: white;
   border-radius: 10rpx;
