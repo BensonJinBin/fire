@@ -3,12 +3,24 @@ const util = require('../../utils/util.js');
 
 Page({
   data: {
-    principal: '',
-    income: '',
-    expense: '',
-    interestRate: '',
-    inflationRate: '',
-    years: '',
+    principal: '100000',
+    income: '50000',
+    expense: '30000',
+    interestRate: '7',
+    inflationRate: '2.3',
+    years: '10',
+    defaultPrincipal: '100000',
+    defaultIncome: '50000',
+    defaultExpense: '30000',
+    defaultInterestRate: '7',
+    defaultInflationRate: '2.3',
+    defaultYears: '10',
+    principalInputClass: 'input input-default',
+    incomeInputClass: 'input input-default',
+    expenseInputClass: 'input input-default',
+    interestRateInputClass: 'input input-default',
+    inflationRateInputClass: 'input input-default',
+    yearsInputClass: 'input input-default',
     results: [],
     analysis: [],
     statusBarHeight: 0
@@ -63,24 +75,181 @@ Page({
     })
   },
   
-  calculate: function() {
-    const { principal, income, expense, interestRate, inflationRate, years } = this.data;
-    
-    // 验证输入数据
-    if (!principal || !income || !expense || !interestRate || !inflationRate || !years) {
-      wx.showToast({
-        title: '请填写所有字段',
-        icon: 'none'
-      });
-      return;
+  onPrincipalFocus: function(e) {
+    if (this.data.principal === this.data.defaultPrincipal) {
+      this.setData({
+        principal: '',
+        principalInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        principalInputClass: 'input'
+      })
     }
+  },
+  
+  onPrincipalBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        principal: this.data.defaultPrincipal,
+        principalInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        principalInputClass: 'input'
+      })
+    }
+  },
+  
+  onIncomeFocus: function(e) {
+    if (this.data.income === this.data.defaultIncome) {
+      this.setData({
+        income: '',
+        incomeInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        incomeInputClass: 'input'
+      })
+    }
+  },
+  
+  onIncomeBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        income: this.data.defaultIncome,
+        incomeInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        incomeInputClass: 'input'
+      })
+    }
+  },
+  
+  onExpenseFocus: function(e) {
+    if (this.data.expense === this.data.defaultExpense) {
+      this.setData({
+        expense: '',
+        expenseInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        expenseInputClass: 'input'
+      })
+    }
+  },
+  
+  onExpenseBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        expense: this.data.defaultExpense,
+        expenseInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        expenseInputClass: 'input'
+      })
+    }
+  },
+  
+  onInterestRateFocus: function(e) {
+    if (this.data.interestRate === this.data.defaultInterestRate) {
+      this.setData({
+        interestRate: '',
+        interestRateInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        interestRateInputClass: 'input'
+      })
+    }
+  },
+  
+  onInterestRateBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        interestRate: this.data.defaultInterestRate,
+        interestRateInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        interestRateInputClass: 'input'
+      })
+    }
+  },
+  
+  onInflationRateFocus: function(e) {
+    if (this.data.inflationRate === this.data.defaultInflationRate) {
+      this.setData({
+        inflationRate: '',
+        inflationRateInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        inflationRateInputClass: 'input'
+      })
+    }
+  },
+  
+  onInflationRateBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        inflationRate: this.data.defaultInflationRate,
+        inflationRateInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        inflationRateInputClass: 'input'
+      })
+    }
+  },
+  
+  onYearsFocus: function(e) {
+    if (this.data.years === this.data.defaultYears) {
+      this.setData({
+        years: '',
+        yearsInputClass: 'input'
+      })
+    } else {
+      this.setData({
+        yearsInputClass: 'input'
+      })
+    }
+  },
+  
+  onYearsBlur: function(e) {
+    if (!e.detail.value) {
+      this.setData({
+        years: this.data.defaultYears,
+        yearsInputClass: 'input input-default'
+      })
+    } else {
+      this.setData({
+        yearsInputClass: 'input'
+      })
+    }
+  },
+  
+  calculate: function() {
+    const { principal, income, expense, interestRate, inflationRate, years, 
+            defaultPrincipal, defaultIncome, defaultExpense, 
+            defaultInterestRate, defaultInflationRate, defaultYears } = this.data;
     
-    const principalNum = parseFloat(principal);
-    const incomeNum = parseFloat(income);
-    const expenseNum = parseFloat(expense);
-    const interestRateNum = parseFloat(interestRate) / 100;
-    const inflationRateNum = parseFloat(inflationRate) / 100;
-    const yearsNum = parseInt(years);
+    // 使用默认值填充空字段
+    const finalPrincipal = (principal === '' || principal === defaultPrincipal) ? defaultPrincipal : principal;
+    const finalIncome = (income === '' || income === defaultIncome) ? defaultIncome : income;
+    const finalExpense = (expense === '' || expense === defaultExpense) ? defaultExpense : expense;
+    const finalInterestRate = (interestRate === '' || interestRate === defaultInterestRate) ? defaultInterestRate : interestRate;
+    const finalInflationRate = (inflationRate === '' || inflationRate === defaultInflationRate) ? defaultInflationRate : inflationRate;
+    const finalYears = (years === '' || years === defaultYears) ? defaultYears : years;
+    
+    const principalNum = parseFloat(finalPrincipal);
+    const incomeNum = parseFloat(finalIncome);
+    const expenseNum = parseFloat(finalExpense);
+    const interestRateNum = parseFloat(finalInterestRate) / 100;
+    const inflationRateNum = parseFloat(finalInflationRate) / 100;
+    const yearsNum = parseInt(finalYears);
     
     if (isNaN(principalNum) || isNaN(incomeNum) || isNaN(expenseNum) || 
         isNaN(interestRateNum) || isNaN(inflationRateNum) || isNaN(yearsNum)) {
@@ -123,7 +292,13 @@ Page({
     
     this.setData({
       results: results,
-      analysis: analysis
+      analysis: analysis,
+      principal: finalPrincipal,
+      income: finalIncome,
+      expense: finalExpense,
+      interestRate: finalInterestRate,
+      inflationRate: finalInflationRate,
+      years: finalYears
     });
     
     wx.showToast({
@@ -140,11 +315,14 @@ Page({
     const lastPrincipal = finalResult.principal;
     const lastExpense = finalResult.expense;
     
+    // 获取当前实际使用的值
+    const actualPrincipal = this.data.principal === this.data.defaultPrincipal ? this.data.defaultPrincipal : this.data.principal;
+    
     // 分析本金变化
-    if (lastPrincipal > parseFloat(this.data.principal)) {
-      analysis.push(`经过${results.length}年，您的本金从${this.data.principal}元增长到了${lastPrincipal}元，增长了${((lastPrincipal/this.data.principal - 1) * 100).toFixed(2)}%。`);
+    if (lastPrincipal > parseFloat(actualPrincipal)) {
+      analysis.push(`经过${results.length}年，您的本金从${actualPrincipal}元增长到了${lastPrincipal}元，增长了${((lastPrincipal/actualPrincipal - 1) * 100).toFixed(2)}%。`);
     } else {
-      analysis.push(`经过${results.length}年，您的本金从${this.data.principal}元变化到了${lastPrincipal}元。`);
+      analysis.push(`经过${results.length}年，您的本金从${actualPrincipal}元变化到了${lastPrincipal}元。`);
     }
     
     // 分析收入与支出关系

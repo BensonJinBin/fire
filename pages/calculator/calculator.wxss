@@ -53,6 +53,10 @@
   box-sizing: border-box;
 }
 
+.input-default {
+  color: #999;
+}
+
 .calculate-btn {
   background-color: #D0F070;
   color: #000;

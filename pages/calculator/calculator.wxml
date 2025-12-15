@@ -9,32 +9,32 @@
   <view class="form">
     <view class="input-group">
       <text class="label">年初本金 (元)</text>
-      <input class="input" type="digit" placeholder="请输入年初本金" bindinput="onPrincipalInput" value="{{principal}}" />
+      <input class="{{principalInputClass || 'input input-default'}}" type="digit" bindinput="onPrincipalInput" bindfocus="onPrincipalFocus" bindblur="onPrincipalBlur" value="{{principal}}" />
     </view>
     
     <view class="input-group">
       <text class="label">年收入 (元)</text>
-      <input class="input" type="digit" placeholder="请输入年收入" bindinput="onIncomeInput" value="{{income}}" />
+      <input class="{{incomeInputClass || 'input input-default'}}" type="digit" bindinput="onIncomeInput" bindfocus="onIncomeFocus" bindblur="onIncomeBlur" value="{{income}}" />
     </view>
     
     <view class="input-group">
       <text class="label">年支出 (元)</text>
-      <input class="input" type="digit" placeholder="请输入年支出" bindinput="onExpenseInput" value="{{expense}}" />
+      <input class="{{expenseInputClass || 'input input-default'}}" type="digit" bindinput="onExpenseInput" bindfocus="onExpenseFocus" bindblur="onExpenseBlur" value="{{expense}}" />
     </view>
     
     <view class="input-group">
       <text class="label">年投资回报率 (%)</text>
-      <input class="input" type="digit" placeholder="请输入年投资回报率" bindinput="onInterestRateInput" value="{{interestRate}}" />
+      <input class="{{interestRateInputClass || 'input input-default'}}" type="digit" bindinput="onInterestRateInput" bindfocus="onInterestRateFocus" bindblur="onInterestRateBlur" value="{{interestRate}}" />
     </view>
     
     <view class="input-group">
       <text class="label">通胀率 (%)</text>
-      <input class="input" type="digit" placeholder="请输入通胀率" bindinput="onInflationRateInput" value="{{inflationRate}}" />
+      <input class="{{inflationRateInputClass || 'input input-default'}}" type="digit" bindinput="onInflationRateInput" bindfocus="onInflationRateFocus" bindblur="onInflationRateBlur" value="{{inflationRate}}" />
     </view>
     
     <view class="input-group">
       <text class="label">计算年数</text>
-      <input class="input" type="number" placeholder="请输入计算年数" bindinput="onYearsInput" value="{{years}}" />
+      <input class="{{yearsInputClass || 'input input-default'}}" type="number" bindinput="onYearsInput" bindfocus="onYearsFocus" bindblur="onYearsBlur" value="{{years}}" />
     </view>
     
     <view class="calculate-btn" bindtap="calculate">开始计算</view>
