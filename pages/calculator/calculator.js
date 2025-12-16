@@ -243,9 +243,17 @@ Page({
         });
       }
     } else {
-      const value = e.detail.value;
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          saving: value.toString()
+        });
+      }
+      
       const income = parseFloat(this.data.income) || 0;
-      const saving = parseFloat(value) || 0;
+      const saving = value;
       const expense = income - saving;
       
       this.setData({
@@ -409,6 +417,14 @@ Page({
         principalInputClass: 'input input-default'
       })
     } else {
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          principal: value.toString()
+        });
+      }
       this.setData({
         principalInputClass: 'input'
       })
@@ -447,13 +463,22 @@ Page({
         });
       }
     } else {
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          income: value.toString()
+        });
+      }
+      
       this.setData({
         incomeInputClass: 'input'
       });
       
       // 如果是支出模式，根据当前收入和储蓄率重新计算年支出和年储蓄
       if (this.data.financeMode === 'expense') {
-        const income = parseFloat(e.detail.value) || 0;
+        const income = value;
         const savingsRate = parseFloat(this.data.savingsRate) || 0;
         const newExpense = income * (1 - savingsRate / 100);
         const newSaving = income - newExpense;
@@ -492,9 +517,8 @@ Page({
         
         // 更新储蓄率，保留一位小数
         if (income > 0) {
-          // 储蓄率 = (收入 - 支出) / 收入 * 100
-          const calculatedSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
-          const finalSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+          const newSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
+          const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
           this.setData({
             savingsRate: finalSavingsRate
           });
@@ -511,16 +535,23 @@ Page({
         });
       }
     } else {
-      const value = e.detail.value;
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          expense: value.toString()
+        });
+      }
+      
       // 如果是支出模式，根据支出计算储蓄率
       if (this.data.financeMode === 'expense') {
         const income = parseFloat(this.data.income) || 0;
         
         // 更新储蓄率，保留一位小数
         if (income > 0) {
-          // 储蓄率 = (收入 - 支出) / 收入 * 100
-          const calculatedSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
-          const finalSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+          const newSavingsRate = Number((((income - value) / income) * 100).toFixed(1));
+          const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
           this.setData({
             savingsRate: finalSavingsRate
           });
@@ -531,7 +562,7 @@ Page({
         }
         
         // 更新储蓄值
-        const newSaving = income - parseFloat(value);
+        const newSaving = income - value;
         this.setData({
           saving: newSaving.toString()
         });
@@ -603,6 +634,14 @@ Page({
         interestRateInputClass: 'input input-default'
       })
     } else {
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          interestRate: value.toString()
+        });
+      }
       this.setData({
         interestRateInputClass: 'input'
       })
@@ -629,6 +668,14 @@ Page({
         inflationRateInputClass: 'input input-default'
       })
     } else {
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          inflationRate: value.toString()
+        });
+      }
       this.setData({
         inflationRateInputClass: 'input'
       })
@@ -655,6 +702,14 @@ Page({
         yearsInputClass: 'input input-default'
       })
     } else {
+      let value = parseFloat(e.detail.value) || 0;
+      // 如果是负数，转换为其绝对值
+      if (value < 0) {
+        value = Math.abs(value);
+        this.setData({
+          years: value.toString()
+        });
+      }
       this.setData({
         yearsInputClass: 'input'
       })
@@ -664,17 +719,40 @@ Page({
   calculate: function() {
     // 根据财务模式确定支出值
     let finalExpense;
+    let finalIncome;
+    
     if (this.data.financeMode === 'expense') {
       // 支出模式：根据收入和储蓄计算支出
-      const income = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
+      finalIncome = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
       const saving = parseFloat(this.data.saving === '' ? this.data.defaultSaving : this.data.saving);
-      finalExpense = (income - saving).toString();
+      finalExpense = (finalIncome - saving);
+      
+      // 验证支出是否大于收入
+      if (finalExpense > finalIncome) {
+        wx.showToast({
+          title: '年支出不能大于年收入',
+          icon: 'none'
+        });
+        return;
+      }
     } else {
       // 储蓄模式：根据收入和储蓄计算支出
-      const income = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
+      finalIncome = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
       const saving = parseFloat(this.data.saving === '' ? this.data.defaultSaving : this.data.saving);
-      finalExpense = (income - saving).toString();
+      finalExpense = (finalIncome - saving);
+      
+      // 验证支出是否大于收入
+      if (finalExpense > finalIncome) {
+        wx.showToast({
+          title: '年支出不能大于年收入',
+          icon: 'none'
+        });
+        return;
+      }
     }
+    
+    // 将支出转换为字符串
+    finalExpense = finalExpense.toString();
     
     const { principal, income, interestRate, inflationRate, years, 
             defaultPrincipal, defaultIncome, 
@@ -682,7 +760,6 @@ Page({
     
     // 使用默认值填充空字段
     const finalPrincipal = (principal === '' || principal === defaultPrincipal) ? defaultPrincipal : principal;
-    const finalIncome = (income === '' || income === defaultIncome) ? defaultIncome : income;
     const finalInterestRate = (interestRate === '' || interestRate === defaultInterestRate) ? defaultInterestRate : interestRate;
     const finalInflationRate = (inflationRate === '' || inflationRate === defaultInflationRate) ? defaultInflationRate : inflationRate;
     
@@ -696,6 +773,16 @@ Page({
         isNaN(interestRateNum) || isNaN(inflationRateNum)) {
       wx.showToast({
         title: '请输入有效数字',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    // 验证是否输入了负值
+    if (principalNum < 0 || incomeNum < 0 || expenseNum < 0 || 
+        interestRateNum < 0 || inflationRateNum < 0) {
+      wx.showToast({
+        title: '输入值不能为负数',
         icon: 'none'
       });
       return;
@@ -725,7 +812,7 @@ Page({
     // 准备要保存的数据
     const calculatorData = {
       principal: finalPrincipal,
-      income: finalIncome,
+      income: finalIncome.toString(),
       expense: finalExpense, // 保存计算得出的支出值
       saving: this.data.saving, // 保存储蓄值
       interestRate: finalInterestRate,
@@ -742,14 +829,14 @@ Page({
         analysis: analysis,
         calculatedYears: results.length.toString(),
         principal: finalPrincipal,
-        income: finalIncome,
+        income: finalIncome.toString(),
         expense: finalExpense,
         saving: this.data.saving,
         interestRate: finalInterestRate,
         inflationRate: finalInflationRate,
         principalInputClass: finalPrincipal !== this.data.defaultPrincipal ? 'input' : 'input input-default',
-        incomeInputClass: finalIncome !== this.data.defaultIncome ? 'input' : 'input input-default',
-        expenseInputClass: finalExpense !== this.data.defaultExpense ? 'input' : 'input input-default',
+        incomeInputClass: finalIncome.toString() !== this.data.defaultIncome ? 'input' : 'input input-default',
+        expenseInputClass: finalExpense !== (parseFloat(this.data.defaultIncome) - parseFloat(this.data.defaultSaving)).toString() ? 'input' : 'input input-default',
         savingInputClass: this.data.saving !== this.data.defaultSaving ? 'input' : 'input input-default',
         interestRateInputClass: finalInterestRate !== this.data.defaultInterestRate ? 'input' : 'input input-default',
         inflationRateInputClass: finalInflationRate !== this.data.defaultInflationRate ? 'input' : 'input input-default'
@@ -761,15 +848,15 @@ Page({
         results: results,
         analysis: analysis,
         principal: finalPrincipal,
-        income: finalIncome,
+        income: finalIncome.toString(),
         expense: finalExpense,
         saving: this.data.saving,
         interestRate: finalInterestRate,
         inflationRate: finalInflationRate,
         years: finalYears,
         principalInputClass: finalPrincipal !== this.data.defaultPrincipal ? 'input' : 'input input-default',
-        incomeInputClass: finalIncome !== this.data.defaultIncome ? 'input' : 'input input-default',
-        expenseInputClass: finalExpense !== this.data.defaultExpense ? 'input' : 'input input-default',
+        incomeInputClass: finalIncome.toString() !== this.data.defaultIncome ? 'input' : 'input input-default',
+        expenseInputClass: finalExpense !== (parseFloat(this.data.defaultIncome) - parseFloat(this.data.defaultSaving)).toString() ? 'input' : 'input input-default',
         savingInputClass: this.data.saving !== this.data.defaultSaving ? 'input' : 'input input-default',
         interestRateInputClass: finalInterestRate !== this.data.defaultInterestRate ? 'input' : 'input input-default',
         inflationRateInputClass: finalInflationRate !== this.data.defaultInflationRate ? 'input' : 'input input-default',
