@@ -316,6 +316,12 @@
   font-weight: bold;
 }
 
+.analysis-value.green-highlight {
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
 .analysis-text {
   font-size: 28rpx;
   color: #555;

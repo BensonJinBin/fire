@@ -125,6 +125,18 @@
   padding: 16rpx;
 }
 
+.features-description {
+  margin-top: 24rpx;
+}
+
+.feature-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  display: block;
+  text-align: justify;
+}
+
 .features-list {
   margin-top: 24rpx;
 }

@@ -26,19 +26,8 @@
     <view class="card">
       <view class="features-section">
         <text class="section-title">功能说明</text>
-        <view class="features-list">
-          <view class="feature-item">
-            <text class="feature-title">- 开支推算</text>
-            <text class="feature-desc">计算退休资金可支撑年数，或推算所需最小退休资金</text>
-          </view>
-          <view class="feature-item">
-            <text class="feature-title">- 储蓄计划</text>
-            <text class="feature-desc">制定FIRE目标达成计划，计算所需储蓄年数</text>
-          </view>
-          <view class="feature-item">
-            <text class="feature-title">- 图表分析</text>
-            <text class="feature-desc">可视化展示资金变化趋势和年度详情</text>
-          </view>
+        <view class="features-description">
+          <text class="feature-text">Fire计算器是一款专业的财务自由规划工具，提供收入/支出和储蓄两种财务模式。收入/支出模式支持目标模式和预测模式，可计算退休所需年数或查看未来财务状况；储蓄模式专注于资产增长预测。系统智能分析投资收益、通胀影响，根据不同模式提供个性化建议。</text>
         </view>
       </view>
     </view>
