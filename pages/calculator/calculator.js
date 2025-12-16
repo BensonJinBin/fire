@@ -98,12 +98,13 @@ Page({
     
     if (income > 0) {
       const savingsRate = ((income - expense) / income) * 100;
+      // 保留一位小数而不是两位
       this.setData({
-        savingsRate: savingsRate.toFixed(2)
+        savingsRate: parseFloat(savingsRate.toFixed(1))
       });
     } else {
       this.setData({
-        savingsRate: '0.00'
+        savingsRate: 0
       });
     }
   },
@@ -132,9 +133,18 @@ Page({
       const income = parseFloat(this.data.income) || 0;
       const saving = parseFloat(this.data.saving) || 0;
       const expense = income - saving;
+      
+      // 根据收入和支出重新计算储蓄率，保留一位小数
+      let newSavingsRate = 0;
+      if (income > 0) {
+        const calculatedSavingsRate = Number((((income - expense) / income) * 100).toFixed(1));
+        newSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+      }
+      
       this.setData({
         financeMode: selectedMode,
-        expense: expense.toString()
+        expense: expense.toString(),
+        savingsRate: newSavingsRate
       });
     } else {
       this.setData({
@@ -174,6 +184,21 @@ Page({
       expense: expense.toString()  // 根据收入和储蓄更新支出
     });
     
+    // 根据收入和储蓄重新计算储蓄率，保留一位小数
+    if (income > 0) {
+      // 使用更精确的计算方式避免浮点数误差
+      const newSavingsRate = Number(((saving / income) * 100).toFixed(1));
+      // 确保不超过100%并保持在合理范围内
+      const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
+      this.setData({
+        savingsRate: finalSavingsRate
+      });
+    } else {
+      this.setData({
+        savingsRate: 0
+      });
+    }
+    
     this.updateSavingsRate();
   },
   
@@ -182,7 +207,7 @@ Page({
     if (this.data.saving === this.data.defaultSaving) {
       this.setData({
         saving: '',
-        savingInputClass: 'input'
+        savingInputClass: 'input input-default'
       });
     } else {
       this.setData({
@@ -203,6 +228,20 @@ Page({
         savingInputClass: 'input input-default',
         expense: expense.toString()
       });
+      
+      // 更新储蓄率
+      if (income > 0) {
+        const newSavingsRate = Number(((parseFloat(value) / income) * 100).toFixed(1));
+        // 确保不超过100%并保持在合理范围内
+        const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
+        this.setData({
+          savingsRate: finalSavingsRate
+        });
+      } else {
+        this.setData({
+          savingsRate: 0
+        });
+      }
     } else {
       const value = e.detail.value;
       const income = parseFloat(this.data.income) || 0;
@@ -213,6 +252,20 @@ Page({
         savingInputClass: 'input',
         expense: expense.toString()
       });
+      
+      // 更新储蓄率
+      if (income > 0) {
+        const newSavingsRate = Number(((saving / income) * 100).toFixed(1));
+        // 确保不超过100%并保持在合理范围内
+        const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
+        this.setData({
+          savingsRate: finalSavingsRate
+        });
+      } else {
+        this.setData({
+          savingsRate: 0
+        });
+      }
     }
     
     this.updateSavingsRate();
@@ -233,8 +286,19 @@ Page({
       incomeInputClass: value === this.data.defaultIncome || !value ? 'input input-default' : 'input'
     });
     
-    // 如果是储蓄模式，根据新的收入值更新支出
-    if (this.data.financeMode === 'saving') {
+    // 根据财务模式更新相应的值
+    if (this.data.financeMode === 'expense') {
+      // 支出模式：根据当前储蓄率重新计算年支出和年储蓄
+      const savingsRate = parseFloat(this.data.savingsRate) || 0;
+      const newExpense = parseFloat(value) * (1 - savingsRate / 100);
+      const newSaving = parseFloat(value) - newExpense;
+      this.setData({
+        expense: newExpense.toFixed(2).toString(),
+        saving: newSaving.toFixed(2).toString()
+      });
+    } 
+    else if (this.data.financeMode === 'saving') {
+      // 储蓄模式：根据新的收入值更新支出
       const saving = parseFloat(this.data.saving) || 0;
       const newExpense = parseFloat(value) - saving;
       this.setData({
@@ -252,13 +316,50 @@ Page({
       expenseInputClass: value === this.data.defaultExpense || !value ? 'input input-default' : 'input'
     });
     
-    // 如果是支出模式，根据新的支出值更新储蓄
+    // 如果是支出模式，根据新的支出值计算储蓄率
     if (this.data.financeMode === 'expense') {
+      const income = parseFloat(this.data.income) || 0;
+      
+      // 根据收入和支出重新计算储蓄率，保留一位小数
+      if (income > 0) {
+        // 储蓄率 = (收入 - 支出) / 收入 * 100
+        const calculatedSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
+        const finalSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+        this.setData({
+          savingsRate: finalSavingsRate
+        });
+      } else {
+        this.setData({
+          savingsRate: 0
+        });
+      }
+      
+      // 更新储蓄值
+      const newSaving = income - parseFloat(value);
+      this.setData({
+        saving: newSaving.toString()
+      });
+    } 
+    // 如果是储蓄模式，根据支出更新储蓄率
+    else {
       const income = parseFloat(this.data.income) || 0;
       const newSaving = income - parseFloat(value);
       this.setData({
         saving: newSaving.toString()
       });
+      
+      // 根据收入和支出重新计算储蓄率，保留一位小数
+      if (income > 0) {
+        const newSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
+        const finalSavingsRate = Math.min(100, Math.max(0, newSavingsRate));
+        this.setData({
+          savingsRate: finalSavingsRate
+        });
+      } else {
+        this.setData({
+          savingsRate: 0
+        });
+      }
     }
     
     this.updateSavingsRate();
@@ -332,11 +433,35 @@ Page({
       this.setData({
         income: this.data.defaultIncome,
         incomeInputClass: 'input input-default'
-      })
+      });
+      
+      // 如果是支出模式，根据默认收入和当前储蓄率重新计算年支出和年储蓄
+      if (this.data.financeMode === 'expense') {
+        const defaultIncome = parseFloat(this.data.defaultIncome) || 0;
+        const savingsRate = parseFloat(this.data.savingsRate) || 0;
+        const newExpense = defaultIncome * (1 - savingsRate / 100);
+        const newSaving = defaultIncome - newExpense;
+        this.setData({
+          expense: newExpense.toFixed(2).toString(),
+          saving: newSaving.toFixed(2).toString()
+        });
+      }
     } else {
       this.setData({
         incomeInputClass: 'input'
-      })
+      });
+      
+      // 如果是支出模式，根据当前收入和储蓄率重新计算年支出和年储蓄
+      if (this.data.financeMode === 'expense') {
+        const income = parseFloat(e.detail.value) || 0;
+        const savingsRate = parseFloat(this.data.savingsRate) || 0;
+        const newExpense = income * (1 - savingsRate / 100);
+        const newSaving = income - newExpense;
+        this.setData({
+          expense: newExpense.toFixed(2).toString(),
+          saving: newSaving.toFixed(2).toString()
+        });
+      }
     }
   },
   
@@ -361,9 +486,25 @@ Page({
         expenseInputClass: 'input input-default'
       });
       
-      // 如果是支出模式，根据默认支出更新储蓄
+      // 如果是支出模式，根据默认支出计算储蓄率
       if (this.data.financeMode === 'expense') {
         const income = parseFloat(this.data.income) || 0;
+        
+        // 更新储蓄率，保留一位小数
+        if (income > 0) {
+          // 储蓄率 = (收入 - 支出) / 收入 * 100
+          const calculatedSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
+          const finalSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+          this.setData({
+            savingsRate: finalSavingsRate
+          });
+        } else {
+          this.setData({
+            savingsRate: 0
+          });
+        }
+        
+        // 更新储蓄值
         const newSaving = income - parseFloat(value);
         this.setData({
           saving: newSaving.toString()
@@ -371,9 +512,25 @@ Page({
       }
     } else {
       const value = e.detail.value;
-      // 如果是支出模式，根据支出更新储蓄
+      // 如果是支出模式，根据支出计算储蓄率
       if (this.data.financeMode === 'expense') {
         const income = parseFloat(this.data.income) || 0;
+        
+        // 更新储蓄率，保留一位小数
+        if (income > 0) {
+          // 储蓄率 = (收入 - 支出) / 收入 * 100
+          const calculatedSavingsRate = Number((((income - parseFloat(value)) / income) * 100).toFixed(1));
+          const finalSavingsRate = Math.min(100, Math.max(0, calculatedSavingsRate));
+          this.setData({
+            savingsRate: finalSavingsRate
+          });
+        } else {
+          this.setData({
+            savingsRate: 0
+          });
+        }
+        
+        // 更新储蓄值
         const newSaving = income - parseFloat(value);
         this.setData({
           saving: newSaving.toString()
@@ -382,6 +539,48 @@ Page({
     }
     
     this.updateSavingsRate();
+  },
+  
+  // 储蓄率滑动条变化
+  onSavingsRateChange: function(e) {
+    let newSavingsRate = e.detail.value;
+    
+    // 滑动时进行吸附，四舍五入到最近的10的倍数
+    const roundedSavingsRate = Math.round(newSavingsRate / 10) * 10;
+    // 确保不超过100%并保留一位小数
+    newSavingsRate = Number((Math.min(100, Math.max(0, roundedSavingsRate)).toFixed(1)));
+    
+    const income = parseFloat(this.data.income) || 0;
+    
+    // 根据当前财务模式计算
+    if (this.data.financeMode === 'expense') {
+      // 支出模式：根据储蓄率计算年支出
+      const newExpense = income * (1 - newSavingsRate / 100);
+      this.setData({
+        savingsRate: newSavingsRate,
+        expense: newExpense.toFixed(2).toString()
+      });
+      
+      // 更新储蓄值
+      const newSaving = income - newExpense;
+      this.setData({
+        saving: newSaving.toFixed(2).toString()
+      });
+    } else {
+      // 储蓄模式：根据储蓄率计算年储蓄
+      const newSaving = income * (newSavingsRate / 100);
+      
+      this.setData({
+        savingsRate: newSavingsRate,
+        saving: newSaving.toFixed(2).toString()
+      });
+      
+      // 更新支出值
+      const newExpense = income - newSaving;
+      this.setData({
+        expense: newExpense.toFixed(2).toString()
+      });
+    }
   },
   
   onInterestRateFocus: function(e) {
@@ -466,9 +665,10 @@ Page({
     // 根据财务模式确定支出值
     let finalExpense;
     if (this.data.financeMode === 'expense') {
-      // 支出模式：直接使用支出值
-      finalExpense = (this.data.expense === '' || this.data.expense === this.data.defaultExpense) ? 
-                     this.data.defaultExpense : this.data.expense;
+      // 支出模式：根据收入和储蓄计算支出
+      const income = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
+      const saving = parseFloat(this.data.saving === '' ? this.data.defaultSaving : this.data.saving);
+      finalExpense = (income - saving).toString();
     } else {
       // 储蓄模式：根据收入和储蓄计算支出
       const income = parseFloat(this.data.income === '' ? this.data.defaultIncome : this.data.income);
@@ -584,6 +784,19 @@ Page({
       title: '计算完成',
       icon: 'success'
     });
+    
+    // 计算完成后滚动到占位元素，确保结果部分与顶部保留空间
+    this.setData({
+      scrollToResult: true
+    });
+    
+    // 延迟执行滚动，确保DOM已更新
+    setTimeout(() => {
+      wx.pageScrollTo({
+        selector: '#results-placeholder',
+        duration: 300  // 滚动动画持续时间，单位为毫秒
+      });
+    }, 100);
   },
   
   // 预测模式计算

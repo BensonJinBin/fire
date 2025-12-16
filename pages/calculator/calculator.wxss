@@ -98,6 +98,28 @@
   color: #666;
 }
 
+.slider-with-percentage {
+  display: flex;
+  align-items: center;
+}
+
+.slider-container {
+  flex: 1;
+  position: relative;
+}
+
+.slider-percentage {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  background: #f0f0f0;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  min-width: 60rpx;
+  text-align: center;
+  pointer-events: none; /* 确保百分号文本不阻挡滑动操作 */
+}
+
 .input {
   width: 100%;
   height: 80rpx;
@@ -187,20 +209,23 @@
 }
 
 .results {
-  background: white;
+  background: #f8fff8;
   border-radius: 10rpx;
   padding: 30rpx;
   margin: 20rpx;
-  margin-top: 20rpx;
+  margin-top: 120rpx;
   box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+  border: 1rpx solid #d0f0d0;  /* 添加边框 */
 }
 
 .results-title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: #2e7d32;
   display: block;
   margin-bottom: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #c8e6c9;
 }
 
 .table-container {
@@ -218,8 +243,9 @@
 }
 
 .table-header {
-  background-color: #f9f9f9;
+  background-color: #e8f5e9;
   font-weight: bold;
+  color: #2e7d32;
 }
 
 .col-year, .col-expense, .col-interest, .col-principal {
@@ -234,14 +260,17 @@
 }
 
 .analysis {
-  border-top: 1rpx solid #eee;
-  padding-top: 20rpx;
+  background: #fff8e1;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-left: 4rpx solid #ffd54f;  /* 左侧彩色边框 */
 }
 
 .analysis-title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: #f57f17;
   display: block;
   margin-bottom: 20rpx;
 }

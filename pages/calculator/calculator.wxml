@@ -42,7 +42,12 @@
         </view>
         <view class="input-group">
           <text class="label">储蓄率 (%)</text>
-          <text class="derived-value">{{savingsRate}}</text>
+          <view class="slider-with-percentage">
+            <view class="slider-container">
+              <slider bindchange="onSavingsRateChange" value="{{savingsRate}}" min="0" max="100" block-size="20" />
+            </view>
+            <text class="slider-percentage">{{savingsRate}}%</text>
+          </view>
         </view>
       </view>
       
@@ -94,10 +99,11 @@
     </view>
     
     <view class="calculate-btn" bindtap="calculate">开始计算</view>
-    <view class="clear-btn" bindtap="clearInputs">清空输入</view>
+    <view class="clear-btn" bindtap="clearInputs">重置</view>
   </view>
   
-  <view class="results" wx:if="{{results.length > 0}}">
+  <view id="results-placeholder"></view>
+  <view class="results" id="results-section" wx:if="{{results.length > 0}}">
     <text class="results-title">计算结果</text>
     <view class="table-container">
       <view class="table-header">
