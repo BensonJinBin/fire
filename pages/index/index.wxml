@@ -24,6 +24,7 @@
     <text class="info-title">计算公式</text>
     <text class="info-text">本计算器使用的计算公式为：</text>
     <text class="info-text">• 年末本金 = 年初本金 - 年消费 + 年利息 + 年收入</text>
+    <text class="info-text">• 年末本金 = 年初本金 + 年储蓄 + 年利息</text>
     <text class="info-text">• 年利息 = 年初本金 × 年投资回报率</text>
     <text class="info-text">• 年消费会随着通胀率逐年增长</text>
   </view>

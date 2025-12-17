@@ -169,7 +169,7 @@
     <view class="table-container">
       <view class="table-header">
         <text class="col-year">年份</text>
-        <text class="col-expense">{{financeMode === 'saving' ? '年存储' : '年支出'}}</text>
+        <text class="col-expense">{{financeMode === 'saving' ? '年储蓄' : '年支出'}}</text>
         <text class="col-interest">年利息</text>
         <text class="col-principal">本金</text>
       </view>
