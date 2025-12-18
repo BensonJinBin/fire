@@ -35,7 +35,7 @@ Page({
     return {
       title: 'FIRE Calculator - 财务自由计算器',
       path: '/pages/index/index',
-      imageUrl: '/images/share/share.png'
+      imageUrl: '/images/share/share.jpg'
     };
   },
 
@@ -43,7 +43,7 @@ Page({
     return {
       title: 'FIRE Calculator - 财务自由计算器',
       query: '',
-      imageUrl: '/images/share/share.png'
+      imageUrl: '/images/share/share.jpg'
     };
   }
 })

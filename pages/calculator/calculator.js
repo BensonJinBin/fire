@@ -1039,7 +1039,7 @@ Page({
     return {
       title: 'FIRE Calculator - 财务自由计算器',
       path: '/pages/calculator/calculator',
-      imageUrl: '/images/share/share.png'
+      imageUrl: '/images/share/share.jpg'
     };
   },
 
@@ -1047,7 +1047,7 @@ Page({
     return {
       title: 'FIRE Calculator - 财务自由计算器',
       query: '',
-      imageUrl: '/images/share/share.png'
+      imageUrl: '/images/share/share.jpg'
     };
   }
 })
