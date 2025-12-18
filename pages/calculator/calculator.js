@@ -7,7 +7,7 @@ Page({
     income: '50000',
     expense: '30000',
     saving: '20000', // 新增：年储蓄
-    interestRate: '7',
+    interestRate: '3',
     inflationRate: '2.3',
     years: '10',
     defaultPrincipal: '100000',
