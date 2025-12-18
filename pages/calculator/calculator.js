@@ -98,9 +98,10 @@ Page({
     
     if (income > 0) {
       const savingsRate = ((income - expense) / income) * 100;
-      // 保留一位小数而不是两位
+      // 如果储蓄率为负数（支出大于收入），则显示0%
+      const finalRate = savingsRate < 0 ? 0 : parseFloat(savingsRate.toFixed(1));
       this.setData({
-        savingsRate: parseFloat(savingsRate.toFixed(1))
+        savingsRate: finalRate
       });
     } else {
       this.setData({
@@ -653,9 +654,15 @@ Page({
       
       // 收入/支出模式的校验：年收入必须大于等于年支出
       if (finalExpense > finalIncome) {
-        wx.showToast({
-          title: '年支出不能大于年收入',
-          icon: 'none'
+        wx.showModal({
+          title: '提示',
+          content: '年支出大于年收入，是否继续计算?',
+          success: (res) => {
+            if (res.confirm) {
+              // 用户点击确定,继续执行计算
+              this.performCalculation(finalIncome, finalExpense);
+            }
+          }
         });
         return;
       }
@@ -680,6 +687,12 @@ Page({
       finalExpense = 0;
     }
     
+    // 调用实际的计算逻辑
+    this.performCalculation(finalIncome, finalExpense);
+  },
+  
+  // 实际执行计算的方法
+  performCalculation: function(finalIncome, finalExpense) {
     // 将支出转换为字符串
     finalExpense = finalExpense.toString();
     
