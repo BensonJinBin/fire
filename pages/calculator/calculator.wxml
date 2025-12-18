@@ -72,6 +72,7 @@
       <view class="input-group" wx:if="{{financeMode === 'expense'}}">
         <text class="label">通胀率 (%)</text>
         <input class="{{inflationRateInputClass || 'input input-default'}}" type="digit" bindinput="onInflationRateInput" bindfocus="onInflationRateFocus" bindblur="onInflationRateBlur" value="{{inflationRate}}" />
+        <text class="hint-text">年通胀率一般在2%-3%​之间</text>
       </view>
     </view>
     

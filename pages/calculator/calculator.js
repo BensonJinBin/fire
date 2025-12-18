@@ -14,7 +14,7 @@ Page({
     defaultIncome: '50000',
     defaultExpense: '30000',
     defaultSaving: '20000', // 新增：默认年储蓄
-    defaultInterestRate: '7',
+    defaultInterestRate: '3',
     defaultInflationRate: '2.3',
     defaultYears: '10',
     principalInputClass: 'input input-default',
