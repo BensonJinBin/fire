@@ -1027,7 +1027,7 @@ Page({
           });
           
           wx.showToast({
-            title: '已清空',
+            title: '已重置',
             icon: 'success'
           });
         }

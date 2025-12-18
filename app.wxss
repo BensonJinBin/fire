@@ -238,14 +238,14 @@ page {
 .custom-bottom-nav {
   position: fixed;
   bottom: 30rpx;
-  left: 30rpx;
-  right: 30rpx;
+  left: 50rpx;
+  right: 50rpx;
   background-color: #000;
-  height: 120rpx;
+  height: 100rpx;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 15rpx 0;
   z-index: 1000;
   border-radius: 20rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
@@ -271,9 +271,9 @@ page {
 }
 
 .nav-item .nav-icon {
-  width: 48rpx;
-  height: 48rpx;
-  margin-bottom: 8rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 4rpx;
   filter: brightness(0) invert(1);
 }
 

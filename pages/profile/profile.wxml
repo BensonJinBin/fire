@@ -45,7 +45,7 @@
     <text class="nav-text">计算器</text>
   </view>
   <view class="nav-item active">
-    <image class="nav-icon" src="/icons/profile_selected.png"></image>
-    <text class="nav-text">我的</text>
+    <image class="nav-icon" src="/icons/setting.png"></image>
+    <text class="nav-text">设置</text>
   </view>
 </view>
