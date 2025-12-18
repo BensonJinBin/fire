@@ -33,7 +33,15 @@ Page({
     return {
       title: 'FIRE Calculator - 财务自由计算器',
       path: '/pages/profile/profile',
-      imageUrl: '/icons/profile.png' // 可以替换为分享时显示的图片
+      imageUrl: '/images/share/share.png'
+    };
+  },
+
+  onShareTimeline: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      query: '',
+      imageUrl: '/images/share/share.png'
     };
   }
 })

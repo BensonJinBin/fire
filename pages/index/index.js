@@ -29,5 +29,21 @@ Page({
     wx.redirectTo({
       url: '/pages/profile/profile'
     })
+  },
+
+  onShareAppMessage: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      path: '/pages/index/index',
+      imageUrl: '/images/share/share.png'
+    };
+  },
+
+  onShareTimeline: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      query: '',
+      imageUrl: '/images/share/share.png'
+    };
   }
 })

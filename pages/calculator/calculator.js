@@ -1033,5 +1033,21 @@ Page({
         }
       }
     });
+  },
+
+  onShareAppMessage: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      path: '/pages/calculator/calculator',
+      imageUrl: '/images/share/share.png'
+    };
+  },
+
+  onShareTimeline: function() {
+    return {
+      title: 'FIRE Calculator - 财务自由计算器',
+      query: '',
+      imageUrl: '/images/share/share.png'
+    };
   }
 })
