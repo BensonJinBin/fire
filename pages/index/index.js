@@ -31,6 +31,12 @@ Page({
     })
   },
 
+  navigateToArbitrage: function() {
+    wx.navigateTo({
+      url: '/pages/arbitrage/arbitrage'
+    })
+  },
+
   onShareAppMessage: function() {
     return {
       title: 'FIRE Calculator - 财务自由计算器',

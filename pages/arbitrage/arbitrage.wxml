@@ -1,0 +1,96 @@
+<view class="page-container">
+  <!-- 状态栏 -->
+  <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
+  
+  <!-- 更新时间 -->
+  <view class="update-time">
+    <text class="update-text">更新时间：{{updateTime}}</text>
+    <text class="header-tag">LOF套利策略</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view 
+    class="content-scroll" 
+    scroll-y 
+    enable-back-to-top
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <!-- 表头 -->
+    <view class="table-header">
+      <view class="header-cell header-cell-name">LOF名称</view>
+      <view class="header-cell">现价</view>
+      <view class="header-cell">T-1估值</view>
+      <view class="header-cell header-cell-rate" bindtap="toggleSort">
+        <text>T-1溢价率</text>
+        <text class="sort-arrow {{sortOrder}}">▼</text>
+      </view>
+    </view>
+
+    <!-- 数据列表 -->
+    <view class="data-list">
+      <view 
+        class="data-row {{index % 2 === 0 ? 'row-even' : 'row-odd'}}" 
+        wx:for="{{lofList}}" 
+        wx:key="id"
+        bindtap="onFundClick"
+        data-fund="{{item}}"
+      >
+        <!-- 标的列 -->
+        <view class="data-cell cell-name">
+          <view class="fund-info">
+            <text class="fund-name">{{item.name}}</text>
+            <view class="fund-code-row">
+              <text class="fund-code">{{item.code}}</text>
+              <text class="status-text status-{{item.status}}">（{{item.statusText}}）</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 现价列 -->
+        <view class="data-cell">
+          <text class="price-text">{{item.currentPrice}}</text>
+        </view>
+
+        <!-- T-1估值列 -->
+        <view class="data-cell">
+          <text class="value-text">{{item.t1Value}}</text>
+        </view>
+
+        <!-- 溢价率列 -->
+        <view class="data-cell cell-rate">
+          <text class="premium-text">{{item.t1PremiumRate}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 温馨提示 -->
+    <view class="tips-section">
+      <view class="tips-title">温馨提示：</view>
+      <view class="tips-item">1. 数据仅供参考，不构成投资建议！</view>
+      <view class="tips-item">2. 数据有一定的延时性，请关注更新时间！</view>
+      <view class="tips-item">3. 估值可能会有一定的误差，请谨慎参考！</view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部Tab导航 -->
+  <view class="bottom-tabs">
+    <view 
+      class="tab-item {{currentTab === 0 ? 'tab-active' : ''}}" 
+      bindtap="switchTab"
+      data-tab="0"
+    >
+      <view class="tab-icon tab-icon-active"></view>
+      <text class="tab-text">套利机会</text>
+    </view>
+    <view 
+      class="tab-item {{currentTab === 1 ? 'tab-active' : ''}}" 
+      bindtap="switchTab"
+      data-tab="1"
+    >
+      <view class="tab-icon tab-icon-chart"></view>
+      <text class="tab-text">全部数据</text>
+    </view>
+  </view>
+</view>

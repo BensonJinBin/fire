@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/calculator/calculator",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/arbitrage/arbitrage"
   ],
   "window": {
     "backgroundTextStyle": "light",

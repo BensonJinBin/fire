@@ -45,6 +45,16 @@
   </view>
   
   <button class="start-btn" bindtap="startCalculator">开始计算</button>
+  
+  <view class="feature-card" bindtap="navigateToArbitrage">
+    <view class="feature-icon feature-icon-arbitrage">¥</view>
+    <view class="feature-info">
+      <text class="feature-title">LOF套利</text>
+      <text class="feature-desc">实时查看LOF基金溢价率，发现套利机会</text>
+    </view>
+    <view class="feature-arrow">›</view>
+  </view>
+  
   <view class="button-spacing"></view>
 </view>
 

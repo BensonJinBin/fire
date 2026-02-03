@@ -78,6 +78,72 @@
   width: 100%;
 }
 
+.feature-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8rpx;
+  height: 100%;
+  background: linear-gradient(180deg, #FF6B35 0%, #FF8C61 100%);
+}
+
+.feature-icon {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.feature-icon-arbitrage {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 100%);
+  color: white;
+}
+
+.feature-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.feature-desc {
+  font-size: 24rpx;
+  color: #888;
+  line-height: 1.4;
+}
+
+.feature-arrow {
+  font-size: 48rpx;
+  color: #ccc;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
 .start-btn:active {
   background-color: #C0E65C;
 }
