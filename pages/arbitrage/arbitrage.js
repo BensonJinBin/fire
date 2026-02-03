@@ -187,6 +187,12 @@ Page({
     // 可以在这里添加跳转到详情页的逻辑
   },
 
+  onStrategyClick: function() {
+    wx.navigateTo({
+      url: '/pages/webview/webview?url=https://mp.weixin.qq.com/s/yBxwfxQ5L_ydpBDf1VHAFg'
+    });
+  },
+
   getStatusText: function(status, limitAmount) {
     if (status === 'pause') return '暂停';
     if (status === 'limit') {

@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/calculator/calculator",
     "pages/profile/profile",
-    "pages/arbitrage/arbitrage"
+    "pages/arbitrage/arbitrage",
+    "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",

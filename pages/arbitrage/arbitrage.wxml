@@ -5,7 +5,7 @@
   <!-- 更新时间 -->
   <view class="update-time">
     <text class="update-text">更新时间：{{updateTime}}</text>
-    <text class="header-tag">LOF套利策略</text>
+    <text class="header-tag" bindtap="onStrategyClick">LOF套利策略</text>
   </view>
 
   <!-- 内容区域 -->
