@@ -110,11 +110,11 @@
 }
 
 .sort-arrow.desc {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
 
 .sort-arrow.asc {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
 /* 数据列表 */
