@@ -32,121 +32,93 @@ Page({
   },
 
   loadLOFData: function() {
-    // 模拟数据
-    const mockData = [
-      {
-        id: '161226',
-        name: '国投白银LOF',
-        code: '161226',
-        status: 'pause',
-        limitAmount: null,
-        currentPrice: 4.722,
-        t1Value: 1.8481,
-        t1PremiumRate: 155.51
-      },
-      {
-        id: '162719',
-        name: '石油LOF',
-        code: '162719',
-        status: 'limit',
-        limitAmount: 10,
-        currentPrice: 2.54,
-        t1Value: 2.3254,
-        t1PremiumRate: 9.23
-      },
-      {
-        id: '160416',
-        name: '石油基金LOF',
-        code: '160416',
-        status: 'pause',
-        limitAmount: null,
-        currentPrice: 2.021,
-        t1Value: 1.8551,
-        t1PremiumRate: 8.94
-      },
-      {
-        id: '501225',
-        name: '全球芯片LOF',
-        code: '501225',
-        status: 'pause',
-        limitAmount: null,
-        currentPrice: 2.426,
-        t1Value: 2.2396,
-        t1PremiumRate: 8.32
-      },
-      {
-        id: '161129',
-        name: '原油LOF易方达',
-        code: '161129',
-        status: 'pause',
-        limitAmount: null,
-        currentPrice: 1.215,
-        t1Value: 1.1336,
-        t1PremiumRate: 7.18
-      },
-      {
-        id: '501018',
-        name: '南方原油LOF',
-        code: '501018',
-        status: 'limit',
-        limitAmount: 10,
-        currentPrice: 1.257,
-        t1Value: 1.1761,
-        t1PremiumRate: 6.88
-      },
-      {
-        id: '161116',
-        name: '黄金主题LOF',
-        code: '161116',
-        status: 'pause',
-        limitAmount: null,
-        currentPrice: 1.87,
-        t1Value: 1.7727,
-        t1PremiumRate: 5.49
-      },
-      {
-        id: '164701',
-        name: '黄金LOF',
-        code: '164701',
-        status: 'limit',
-        limitAmount: 10,
-        currentPrice: 1.987,
-        t1Value: 1.8871,
-        t1PremiumRate: 5.29
-      },
-      {
-        id: '160644',
-        name: '港美互联网LOF',
-        code: '160644',
-        status: 'limit',
-        limitAmount: 100000,
-        currentPrice: 1.73,
-        t1Value: 1.6808,
-        t1PremiumRate: 2.93
-      }
-    ];
-
-    // 为每个基金添加statusText字段
-    let processedData = mockData.map(item => ({
-      ...item,
-      statusText: this.getStatusText(item.status, item.limitAmount)
-    }));
-
-    // 按照默认排序顺序进行排序
-    const { sortOrder } = this.data;
-    processedData = processedData.sort((a, b) => {
-      if (sortOrder === 'asc') {
-        return a.t1PremiumRate - b.t1PremiumRate;
-      } else {
-        return b.t1PremiumRate - a.t1PremiumRate;
-      }
+    wx.showLoading({
+      title: '加载中...'
     });
 
-    this.setData({
-      allLofList: processedData,
-      lofList: this.filterData(processedData),
-      updateTime: this.getCurrentTime()
-    });
+    // 获取全局云开发实例
+    const cloud = getApp().cloud;
+    if (!cloud) {
+      wx.hideLoading();
+      wx.showToast({
+        title: '云开发未初始化',
+        icon: 'none'
+      });
+      console.error('跨账号云开发实例未初始化');
+      return;
+    }
+
+    // 使用跨账号云开发实例
+    const db = cloud.database();
+
+    console.log('开始查询数据库，使用跨账号云开发实例');
+
+    db.collection('funds')
+      .where({
+        is_listed: true
+      })
+      .get()
+      .then(res => {
+        console.log('数据库查询成功，返回数据:', res.data.length, '条');
+        const cloudData = res.data || [];
+
+        // 映射字段格式，并确保溢价率保持两位小数（字符串格式）
+        let processedData = cloudData.map(item => {
+          // 根据申购状态设置状态和状态文字
+          let status = 'normal';
+          let statusText = '正常';
+          let limitAmount = null;
+
+          if (item.subscription_status === '暂停') {
+            status = 'pause';
+            statusText = '暂停申购';
+          }
+
+          return {
+            id: item._id,
+            code: item._id,
+            name: item.name,
+            currentPrice: item.price,
+            t1Value: item.nav,
+            t1PremiumRate: item.premium_rate.toFixed(2), // 保留两位小数，返回字符串
+            status: status,
+            limitAmount: limitAmount,
+            statusText: statusText,
+            premiumRateColor: parseFloat(item.premium_rate) < 0 ? 'green' : 'red' // 负数为绿色，正数为红色
+          };
+        });
+
+        // 按照默认排序顺序进行排序（需要转换为数值进行排序）
+        const { sortOrder } = this.data;
+        processedData = processedData.sort((a, b) => {
+          const aRate = parseFloat(a.t1PremiumRate);
+          const bRate = parseFloat(b.t1PremiumRate);
+          if (sortOrder === 'asc') {
+            return aRate - bRate;
+          } else {
+            return bRate - aRate;
+          }
+        });
+
+        this.setData({
+          allLofList: processedData,
+          lofList: this.filterData(processedData),
+          updateTime: this.getCurrentTime()
+        });
+
+        wx.hideLoading();
+        console.log('数据加载完成，共', processedData.length, '只基金');
+      })
+      .catch(err => {
+        console.error('获取数据失败:', err);
+        console.error('错误详情:', JSON.stringify(err));
+        wx.hideLoading();
+        wx.showToast({
+          title: '加载失败',
+          icon: 'none',
+          duration: 3000
+        });
+      });
   },
 
   // 根据当前Tab筛选数据
@@ -154,7 +126,7 @@ Page({
     const { currentTab } = this.data;
     if (currentTab === 0) {
       // 套利机会：状态不是暂停，且溢价率大于0
-      return data.filter(item => item.status !== 'pause' && item.t1PremiumRate > 0);
+      return data.filter(item => item.status !== 'pause' && parseFloat(item.t1PremiumRate) > 0);
     } else {
       // 实时数据：显示全部
       return data;
@@ -194,7 +166,7 @@ Page({
   },
 
   getStatusText: function(status, limitAmount) {
-    if (status === 'pause') return '暂停';
+    if (status === 'pause') return '暂停申购';
     if (status === 'limit') {
       if (limitAmount >= 100000) return '限10万';
       return `限${limitAmount}`;
@@ -207,10 +179,12 @@ Page({
     const newOrder = sortOrder === 'desc' ? 'asc' : 'desc';
     
     const sortedList = [...allLofList].sort((a, b) => {
+      const aRate = parseFloat(a.t1PremiumRate);
+      const bRate = parseFloat(b.t1PremiumRate);
       if (newOrder === 'asc') {
-        return a.t1PremiumRate - b.t1PremiumRate;
+        return aRate - bRate;
       } else {
-        return b.t1PremiumRate - a.t1PremiumRate;
+        return bRate - aRate;
       }
     });
 

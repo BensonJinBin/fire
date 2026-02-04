@@ -12,6 +12,7 @@
     "navigationBarTitleText": "Fire计算器",
     "navigationBarTextStyle": "black"
   },
+  "cloud": true,
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

@@ -188,15 +188,15 @@
 }
 
 .status-pause {
-  color: #E74C3C;
+  color: #E74C3C; /* 红色 - 暂停申购 */
 }
 
 .status-limit {
-  color: #27AE60;
+  color: #27AE60; /* 绿色 - 限购 */
 }
 
 .status-normal {
-  color: #3498db;
+  color: #3498db; /* 蓝色 - 正常 */
 }
 
 /* 价格文本 */
@@ -217,6 +217,14 @@
   font-size: 32rpx;
   font-weight: 600;
   color: #E74C3C;
+}
+
+.premium-text.green {
+  color: #27AE60; /* 绿色 */
+}
+
+.premium-text.red {
+  color: #E74C3C; /* 红色 */
 }
 
 

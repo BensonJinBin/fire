@@ -60,7 +60,7 @@
 
         <!-- 溢价率列 -->
         <view class="data-cell cell-rate">
-          <text class="premium-text">{{item.t1PremiumRate}}%</text>
+          <text class="premium-text {{item.premiumRateColor}}">{{item.t1PremiumRate}}%</text>
         </view>
       </view>
     </view>
