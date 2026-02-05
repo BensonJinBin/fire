@@ -85,13 +85,22 @@ Page({
         // 映射字段格式，并确保溢价率保持两位小数（字符串格式）
         let processedData = cloudData.map(item => {
           // 根据申购状态设置状态和状态文字
+          // subscription_status 的可能值: "开放", "暂停", "限X", "限X万"
           let status = 'normal';
           let statusText = '正常';
           let limitAmount = null;
 
-          if (item.subscription_status === '暂停') {
+          const subStatus = item.subscription_status || '开放';
+          
+          if (subStatus === '暂停') {
             status = 'pause';
             statusText = '暂停';
+          } else if (subStatus === '开放') {
+            status = 'normal';
+            statusText = '开放';
+          } else if (subStatus.startsWith('限')) {
+            status = 'limit';
+            statusText = subStatus;  // 直接显示 "限10" 或 "限1万"
           }
 
           return {
