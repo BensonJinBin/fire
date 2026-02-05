@@ -21,9 +21,9 @@
     <view class="table-header">
       <view class="header-cell header-cell-name">LOF名称</view>
       <view class="header-cell">现价</view>
-      <view class="header-cell">T-1估值</view>
+      <view class="header-cell">估值</view>
       <view class="header-cell header-cell-rate" bindtap="toggleSort">
-        <text>T-1溢价率</text>
+        <text>溢价率</text>
         <text class="sort-arrow {{sortOrder}}">▼</text>
       </view>
     </view>

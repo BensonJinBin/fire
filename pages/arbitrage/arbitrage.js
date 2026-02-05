@@ -2,7 +2,7 @@
 Page({
   data: {
     statusBarHeight: 0,
-    updateTime: '',
+    updateTime: '', // 更新时间，格式：2月4日 16:00
     currentTab: 0,
     lofList: [],
     allLofList: [], // 保存全部数据
@@ -15,20 +15,40 @@ Page({
     const statusBarHeight = systemInfo.statusBarHeight || 20;
     
     this.setData({
-      statusBarHeight: statusBarHeight,
-      updateTime: this.getCurrentTime()
+      statusBarHeight: statusBarHeight
     });
 
     this.loadLOFData();
   },
 
-  getCurrentTime: function() {
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    return `${month}月${day}日 ${hours}点${minutes < 10 ? '0' + minutes : minutes}分`;
+  // 格式化更新时间
+  formatUpdateTime: function(updatedAt) {
+    console.log('formatUpdateTime 接收到的参数:', updatedAt);
+    
+    if (!updatedAt) {
+      console.log('updatedAt 为空，返回空字符串');
+      return '';
+    }
+    
+    try {
+      const date = new Date(updatedAt);
+      console.log('解析后的 Date 对象:', date);
+      console.log('Date 是否有效:', !isNaN(date.getTime()));
+      
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      
+      // 格式化为 "2月4日22:32"
+      const formatted = `${month}月${day}日${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+      console.log('格式化结果:', formatted);
+      
+      return formatted;
+    } catch (error) {
+      console.error('格式化时间失败:', error);
+      return '';
+    }
   },
 
   loadLOFData: function() {
@@ -71,7 +91,7 @@ Page({
 
           if (item.subscription_status === '暂停') {
             status = 'pause';
-            statusText = '暂停申购';
+            statusText = '暂停';
           }
 
           return {
@@ -84,7 +104,8 @@ Page({
             status: status,
             limitAmount: limitAmount,
             statusText: statusText,
-            premiumRateColor: parseFloat(item.premium_rate) < 0 ? 'green' : 'red' // 负数为绿色，正数为红色
+            premiumRateColor: parseFloat(item.premium_rate) < 0 ? 'green' : 'red', // 负数为绿色，正数为红色
+            updated_at: item.updated_at // 添加更新时间字段
           };
         });
 
@@ -103,8 +124,11 @@ Page({
         this.setData({
           allLofList: processedData,
           lofList: this.filterData(processedData),
-          updateTime: this.getCurrentTime()
+          updateTime: this.formatUpdateTime(processedData[0]?.updated_at)
         });
+        
+        console.log('第一条记录的 updated_at:', processedData[0]?.updated_at);
+        console.log('格式化后的更新时间:', this.formatUpdateTime(processedData[0]?.updated_at));
 
         wx.hideLoading();
         console.log('数据加载完成，共', processedData.length, '只基金');
