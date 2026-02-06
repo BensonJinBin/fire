@@ -28,20 +28,24 @@ Page({
       url: '/pages/calculator/calculator'
     });
   },
+
+  navigateToArbitrage: function() {
+    wx.navigateTo({
+      url: '/pages/arbitrage/arbitrage'
+    })
+  },
   
   onShareAppMessage: function() {
     return {
       title: 'FIRE Calculator - 财务自由计算器',
-      path: '/pages/profile/profile',
-      imageUrl: '/images/share/share.jpg'
+      path: '/pages/profile/profile'
     };
   },
 
   onShareTimeline: function() {
     return {
       title: 'FIRE Calculator - 财务自由计算器',
-      query: '',
-      imageUrl: '/images/share/share.jpg'
+      query: ''
     };
   }
 })

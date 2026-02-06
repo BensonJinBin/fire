@@ -200,6 +200,6 @@
   </view>
   <view class="nav-item" bindtap="navigateToProfile">
     <image class="nav-icon" src="/icons/setting.png"></image>
-    <text class="nav-text">设置</text>
+    <text class="nav-text">工具</text>
   </view>
 </view>

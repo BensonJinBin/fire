@@ -3,7 +3,25 @@
   <!-- 自定义顶部区域，用于适配安全区域 -->
   <view class="status-bar" style="height:{{statusBarHeight}}px;"></view>
   <view class="custom-nav">
-    <text class="nav-title">Fire计算器</text>
+    <text class="nav-title">工具</text>
+  </view>
+
+  <view class="feature-card" bindtap="navigateToArbitrage">
+    <view class="feature-icon feature-icon-arbitrage">¥</view>
+    <view class="feature-info">
+      <text class="feature-title">LOF套利</text>
+      <text class="feature-desc">实时查看LOF基金溢价率，发现套利机会</text>
+    </view>
+    <view class="feature-arrow">›</view>
+  </view>
+
+  <view class="feature-card calculator-card" bindtap="navigateToCalculator">
+    <view class="feature-icon feature-icon-calculator">🔢</view>
+    <view class="feature-info">
+      <text class="feature-title">Fire计算器</text>
+      <text class="feature-desc">规划您的财务自由之路，计算退休所需时间</text>
+    </view>
+    <view class="feature-arrow">›</view>
   </view>
   
   <view class="content">
@@ -21,16 +39,6 @@
     </view>
 
     <ad unit-id="adunit-5c28703d6d3e2c5b" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
-    
-    <!-- 功能说明模块 -->
-    <view class="card">
-      <view class="features-section">
-        <text class="section-title">功能说明</text>
-        <view class="features-description">
-          <text class="feature-text">Fire计算器是一款专业的财务自由规划工具，提供收入/支出和储蓄两种财务模式。收入/支出模式支持目标模式和预测模式，可计算退休所需年数或查看未来财务状况；储蓄模式专注于资产增长预测。系统智能分析投资收益、通胀影响，根据不同模式提供个性化建议。</text>
-        </view>
-      </view>
-    </view>
   </view>
 </view>
 
@@ -46,6 +54,6 @@
   </view>
   <view class="nav-item active">
     <image class="nav-icon" src="/icons/setting.png"></image>
-    <text class="nav-text">设置</text>
+    <text class="nav-text">工具</text>
   </view>
 </view>
