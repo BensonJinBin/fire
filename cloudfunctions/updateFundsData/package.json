@@ -1,0 +1,1 @@
+{"name": "updateFundsData", "version": "1.0.0", "description": "定时更新LOF基金数据", "main": "index.js", "dependencies": {"wx-server-sdk": "~2.6.3", "request": "^2.88.2", "request-promise-native": "^1.0.9", "iconv-lite": "^0.6.3"}}

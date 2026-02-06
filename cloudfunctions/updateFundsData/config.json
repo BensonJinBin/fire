@@ -1,0 +1,10 @@
+{
+  "timeout": 600,
+  "triggers": [
+    {
+      "name": "updateFundsDataTimer",
+      "type": "timer",
+      "config": "0 0 * * * * *"
+    }
+  ]
+}
