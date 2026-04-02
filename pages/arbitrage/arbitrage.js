@@ -18,7 +18,24 @@ Page({
       statusBarHeight: statusBarHeight
     });
 
-    this.loadLOFData();
+    // 等待云开发初始化完成后再加载数据
+    this.waitForCloudInit();
+  },
+
+  // 等待云开发初始化完成
+  waitForCloudInit: function(retryCount) {
+    retryCount = retryCount || 0;
+    const cloud = getApp().cloud;
+    if (cloud) {
+      console.log('云开发已初始化，开始加载数据');
+      this.loadLOFData();
+    } else if (retryCount < 50) {
+      console.log('等待云开发初始化...', retryCount);
+      setTimeout(() => this.waitForCloudInit(retryCount + 1), 100);
+    } else {
+      console.error('云开发初始化超时');
+      wx.showToast({ title: '网络异常，请重试', icon: 'none' });
+    }
   },
 
   // 格式化更新时间

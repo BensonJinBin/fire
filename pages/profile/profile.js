@@ -37,14 +37,14 @@ Page({
   
   onShareAppMessage: function() {
     return {
-      title: 'FIRE Calculator - 财务自由计算器',
+      title: 'FIRE工具箱 - 财务自由助手',
       path: '/pages/profile/profile'
     };
   },
 
   onShareTimeline: function() {
     return {
-      title: 'FIRE Calculator - 财务自由计算器',
+      title: 'FIRE工具箱 - 财务自由助手',
       query: ''
     };
   }
