@@ -20,11 +20,11 @@
       <view class="input-group">
         <radio-group bindchange="onFinanceModeChange">
           <label class="radio-label {{financeMode === 'expense' ? 'selected' : 'unselected'}}">
-            <radio value="expense" checked="{{financeMode === 'expense'}}" color="#F5A623" />
+            <radio value="expense" checked="{{financeMode === 'expense'}}" color="#3DBEA0" />
             <text class="radio-text">收入/支出模式</text>
           </label>
           <label class="radio-label {{financeMode === 'saving' ? 'selected' : 'unselected'}}" style="margin-left: 40rpx;">
-            <radio value="saving" checked="{{financeMode === 'saving'}}" color="#F5A623" />
+            <radio value="saving" checked="{{financeMode === 'saving'}}" color="#3DBEA0" />
             <text class="radio-text">储蓄模式</text>
           </label>
         </radio-group>
@@ -84,13 +84,13 @@
           <!-- 支出模式下显示两个选项 -->
           <block wx:if="{{financeMode === 'expense'}}">
             <label class="radio-label {{isTargetMode ? 'selected' : 'unselected'}}">
-              <radio value="target" checked="{{isTargetMode}}" color="#F5A623" />
+              <radio value="target" checked="{{isTargetMode}}" color="#3DBEA0" />
               <text class="radio-text">目标模式</text>
             </label>
             <text class="mode-description {{isTargetMode ? 'selected' : 'unselected'}}">我想知道多少年后能退休(投资收益大于支出)</text>
             
             <label class="radio-label {{!isTargetMode ? 'selected' : 'unselected'}}" style="margin-top: 20rpx;">
-              <radio value="prediction" checked="{{!isTargetMode}}" color="#F5A623" />
+              <radio value="prediction" checked="{{!isTargetMode}}" color="#3DBEA0" />
               <text class="radio-text">预测模式</text>
             </label>
             <text class="mode-description {{!isTargetMode ? 'selected' : 'unselected'}}">我想知道N年后有多少钱</text>
@@ -99,7 +99,7 @@
           <!-- 储蓄模式下只显示预测模式 -->
           <block wx:if="{{financeMode === 'saving'}}">
             <label class="radio-label selected">
-              <radio value="prediction" checked="true" color="#F5A623" />
+              <radio value="prediction" checked="true" color="#3DBEA0" />
               <text class="radio-text">预测模式</text>
             </label>
             <text class="mode-description selected">我想知道N年后有多少钱</text>

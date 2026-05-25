@@ -7,11 +7,11 @@
 
 .status-bar {
   width: 100%;
-  background-color: #F5A623;
+  background-color: #3DBEA0;
 }
 
 .custom-nav {
-  background-color: #F5A623;
+  background-color: #3DBEA0;
   padding: 20rpx 20rpx 30rpx;
   text-align: center;
 }
@@ -62,8 +62,8 @@
 }
 
 .start-btn {
-  background-color: #F5A623;
-  background: linear-gradient(135deg, #F5A623 0%, #E09000 100%);
+  background-color: #3DBEA0;
+  background: linear-gradient(135deg, #3DBEA0 0%, #2FA38A 100%);
   color: #333;
   border-radius: 12rpx;
   padding: 0 24rpx;
@@ -146,7 +146,7 @@
 }
 
 .start-btn:active {
-  background: linear-gradient(135deg, #E09000 0%, #CC7A00 100%);
+  background: linear-gradient(135deg, #2FA38A 0%, #238B75 100%);
 }
 
 .button-spacing {
@@ -155,15 +155,15 @@
 
 .info-btn {
   background-color: #fff;
-  color: #F5A623;
+  color: #3DBEA0;
   border-radius: 50rpx;
   padding: 20rpx;
   font-size: 32rpx;
   margin: 20rpx;
-  border: 1rpx solid #F5A623;
+  border: 1rpx solid #3DBEA0;
   display: block;
 }
 
 .info-btn:active {
-  background-color: #FFF5E6;
+  background-color: #E8F8F4;
 }
