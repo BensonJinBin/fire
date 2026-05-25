@@ -431,6 +431,16 @@ Page({
 
       if (interest >= currentExpense) break;
 
+      // 本金耗尽，无法达成目标
+      if (newPrincipal <= 0) {
+        wx.showModal({
+          title: '无法达成目标',
+          content: '按当前参数，本金将在第' + (year + 1) + '年耗尽。建议提高收入、降低支出或提高投资回报率。',
+          showCancel: false
+        });
+        break;
+      }
+
       currentPrincipal = newPrincipal;
       if (!isSavingMode) {
         currentExpense = util.multiply(currentExpense, (1 + inflationRateNum));
