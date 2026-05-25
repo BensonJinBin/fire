@@ -1,0 +1,15 @@
+<!-- components/tab-bar/tab-bar.wxml -->
+<view class="custom-bottom-nav">
+  <view class="nav-item {{active === 'home' ? 'active' : ''}}" bindtap="onTap" data-page="home">
+    <image class="nav-icon" src="/icons/home.png"></image>
+    <text class="nav-text">首页</text>
+  </view>
+  <view class="nav-item {{active === 'calculator' ? 'active' : ''}}" bindtap="onTap" data-page="calculator">
+    <image class="nav-icon" src="/icons/calculator.png"></image>
+    <text class="nav-text">计算器</text>
+  </view>
+  <view class="nav-item {{active === 'profile' ? 'active' : ''}}" bindtap="onTap" data-page="profile">
+    <image class="nav-icon" src="/icons/setting.png"></image>
+    <text class="nav-text">工具</text>
+  </view>
+</view>

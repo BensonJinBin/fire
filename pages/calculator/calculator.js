@@ -989,20 +989,6 @@ Page({
     return analysis;
   },
   
-  // 导航到首页
-  navigateToIndex: function() {
-    wx.redirectTo({
-      url: '/pages/index/index'
-    });
-  },
-  
-  // 导航到个人页面
-  navigateToProfile: function() {
-    wx.redirectTo({
-      url: '/pages/profile/profile'
-    });
-  },
-  
   clearInputs: function() {
     const currentTargetMode = this.data.isTargetMode; // 保存当前目标模式
     const currentFinanceMode = this.data.financeMode; // 保存当前财务模式

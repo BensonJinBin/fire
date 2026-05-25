@@ -14,23 +14,11 @@ Page({
   },
   
   startCalculator: function() {
-    wx.redirectTo({
+    wx.reLaunch({
       url: '/pages/calculator/calculator'
     })
   },
   
-  navigateToCalculator: function() {
-    wx.redirectTo({
-      url: '/pages/calculator/calculator'
-    })
-  },
-  
-  navigateToProfile: function() {
-    wx.redirectTo({
-      url: '/pages/profile/profile'
-    })
-  },
-
   navigateToArbitrage: function() {
     wx.navigateTo({
       url: '/pages/arbitrage/arbitrage'
