@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/arbitrage/arbitrage",
     "pages/index/index",
     "pages/calculator/calculator",
     "pages/profile/profile",
-    "pages/arbitrage/arbitrage",
     "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Fire计算器",
+    "navigationBarTitleText": "LOF套利",
     "navigationBarTextStyle": "black"
   },
   "cloud": true,
