@@ -14,7 +14,7 @@ Page({
   },
   
   startCalculator: function() {
-    wx.reLaunch({
+    wx.redirectTo({
       url: '/pages/calculator/calculator'
     })
   },

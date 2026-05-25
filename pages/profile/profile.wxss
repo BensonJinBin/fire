@@ -157,8 +157,9 @@
 }
 
 .share-btn {
+  background-color: #F5A623;
   background: linear-gradient(135deg, #F5A623 0%, #E09000 100%);
-  color: #fff;
+  color: #333;
   border-radius: 8rpx;
   border: none;
   padding: 12rpx 24rpx;

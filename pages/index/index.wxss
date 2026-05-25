@@ -62,8 +62,9 @@
 }
 
 .start-btn {
+  background-color: #F5A623;
   background: linear-gradient(135deg, #F5A623 0%, #E09000 100%);
-  color: #fff;
+  color: #333;
   border-radius: 12rpx;
   padding: 0 24rpx;
   height: 80rpx;

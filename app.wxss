@@ -87,8 +87,9 @@ page {
 
 /* 按钮样式 */
 .primary-btn {
+  background-color: var(--primary-color);
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  color: white;
+  color: #333;
   border-radius: 50rpx;
   padding: 25rpx;
   font-size: 32rpx;

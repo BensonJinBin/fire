@@ -18,7 +18,7 @@ Component({
         profile: '/pages/profile/profile'
       };
 
-      wx.reLaunch({
+      wx.redirectTo({
         url: urlMap[page],
         fail(err) {
           console.error('tab-bar navigation failed:', err);

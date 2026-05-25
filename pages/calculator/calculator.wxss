@@ -43,8 +43,8 @@
 }
 
 .group2 {
-  background-color: #FFF5E6;
-  border: 1rpx solid #FFD699;
+  background-color: #F5FFF0;
+  border: 1rpx solid #D6F5C8;
 }
 
 .group3 {
@@ -178,8 +178,9 @@
 }
 
 .calculate-btn {
+  background-color: #F5A623;
   background: linear-gradient(135deg, #F5A623 0%, #E09000 100%);
-  color: #fff;
+  color: #333;
   border-radius: 12rpx;
   padding: 0 24rpx;
   height: 80rpx;
@@ -227,7 +228,7 @@
 .results-title {
   font-size: 32rpx;
   font-weight: bold;
-  color: #E09000;
+  color: #8B6914;
   display: block;
   margin-bottom: 20rpx;
   padding-bottom: 10rpx;
@@ -251,7 +252,7 @@
 .table-header {
   background-color: #FFF5E6;
   font-weight: bold;
-  color: #E09000;
+  color: #8B6914;
 }
 
 .col-year, .col-expense, .col-interest, .col-principal {
@@ -319,12 +320,12 @@
 }
 
 .analysis-value.highlight {
-  color: #E09000;
+  color: #8B6914;
   font-weight: bold;
 }
 
 .analysis-value.green-highlight {
-  color: #F5A623;
+  color: #8B6914;
   font-weight: bold;
   font-size: 32rpx;
 }
