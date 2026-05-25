@@ -13,7 +13,7 @@
       
       <view class="input-group">
         <text class="label">当前储蓄总金额 (元)</text>
-        <input class="{{principalInputClass || 'input input-default'}}" type="digit" bindinput="onPrincipalInput" bindfocus="onPrincipalFocus" bindblur="onPrincipalBlur" value="{{principal}}" />
+        <input class="{{principalInputClass || 'input input-default'}}" type="digit" bindinput="handleInput" bindfocus="handleFocus" bindblur="handleBlur" data-field="principal" value="{{principal}}" />
       </view>
       
       <!-- 模式切换器 -->
@@ -34,11 +34,11 @@
       <view wx:if="{{financeMode === 'expense'}}">
         <view class="input-group">
           <text class="label">年收入 (元)</text>
-          <input class="{{incomeInputClass || 'input input-default'}}" type="digit" bindinput="onIncomeInput" bindfocus="onIncomeFocus" bindblur="onIncomeBlur" value="{{income}}" />
+          <input class="{{incomeInputClass || 'input input-default'}}" type="digit" bindinput="onIncomeInput" bindfocus="handleFocus" bindblur="onIncomeBlur" data-field="income" value="{{income}}" />
         </view>
         <view class="input-group">
           <text class="label">年支出 (元)</text>
-          <input class="{{expenseInputClass || 'input input-default'}}" type="digit" bindinput="onExpenseInput" bindfocus="onExpenseFocus" bindblur="onExpenseBlur" value="{{expense}}" />
+          <input class="{{expenseInputClass || 'input input-default'}}" type="digit" bindinput="onExpenseInput" bindfocus="handleFocus" bindblur="onExpenseBlur" data-field="expense" value="{{expense}}" />
         </view>
         <view class="input-group">
           <text class="label">储蓄率 (%)</text>
@@ -54,7 +54,7 @@
       <view wx:elif="{{financeMode === 'saving'}}">
         <view class="input-group">
           <text class="label">每年储蓄金额 (元)</text>
-          <input class="{{savingInputClass || 'input input-default'}}" type="digit" bindinput="onSavingInput" bindfocus="onSavingFocus" bindblur="onSavingBlur" value="{{saving}}" />
+          <input class="{{savingInputClass || 'input input-default'}}" type="digit" bindinput="onSavingInput" bindfocus="handleFocus" bindblur="onSavingBlur" data-field="saving" value="{{saving}}" />
           <text class="hint-text">您每年计划存入的资金</text>
         </view>
       </view>
@@ -65,13 +65,13 @@
       <text class="group-title">市场与经济假设</text>
       <view class="input-group">
         <text class="label">平均投资回报 (%)</text>
-        <input class="{{interestRateInputClass || 'input input-default'}}" type="digit" bindinput="onInterestRateInput" bindfocus="onInterestRateFocus" bindblur="onInterestRateBlur" value="{{interestRate}}" />
+        <input class="{{interestRateInputClass || 'input input-default'}}" type="digit" bindinput="handleInput" bindfocus="handleFocus" bindblur="handleBlur" data-field="interestRate" value="{{interestRate}}" />
         <text class="hint-text">普通理财产品的年化收益率约为3%</text>
       </view>
       
       <view class="input-group" wx:if="{{financeMode === 'expense'}}">
         <text class="label">通胀率 (%)</text>
-        <input class="{{inflationRateInputClass || 'input input-default'}}" type="digit" bindinput="onInflationRateInput" bindfocus="onInflationRateFocus" bindblur="onInflationRateBlur" value="{{inflationRate}}" />
+        <input class="{{inflationRateInputClass || 'input input-default'}}" type="digit" bindinput="handleInput" bindfocus="handleFocus" bindblur="handleBlur" data-field="inflationRate" value="{{inflationRate}}" />
         <text class="hint-text">年通胀率一般在2%-3%​之间</text>
       </view>
     </view>
@@ -109,7 +109,7 @@
       
       <view wx:if="{{!isTargetMode}}" class="input-group">
         <text class="label">计算年数</text>
-        <input class="{{yearsInputClass || 'input input-default'}}" type="number" bindinput="onYearsInput" bindfocus="onYearsFocus" bindblur="onYearsBlur" value="{{years}}" />
+        <input class="{{yearsInputClass || 'input input-default'}}" type="number" bindinput="handleInput" bindfocus="handleFocus" bindblur="handleBlur" data-field="years" value="{{years}}" />
       </view>
     </view>
     
