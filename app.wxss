@@ -2,10 +2,10 @@
 
 /* 主题颜色定义 */
 page {
-  --primary-color: #007aff;
-  --primary-light: #5a9cff;
-  --primary-dark: #0051a2;
-  --secondary-color: #f0f7ff;
+  --primary-color: #F5A623;
+  --primary-light: #F7B84D;
+  --primary-dark: #E09000;
+  --secondary-color: #FFF8EE;
   --text-primary: #333;
   --text-secondary: #666;
   --text-tertiary: #888;
@@ -17,7 +17,7 @@ page {
 
 /* 通用样式 */
 .container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #f5efe4 100%);
   min-height: 100vh;
 }
 
@@ -73,7 +73,7 @@ page {
   left: 0;
   width: 60rpx;
   height: 4rpx;
-  background: linear-gradient(90deg, #007aff, #5a9cff);
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
   border-radius: 2rpx;
 }
 
@@ -87,7 +87,7 @@ page {
 
 /* 按钮样式 */
 .primary-btn {
-  background: linear-gradient(135deg, #007aff 0%, #0051a2 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
   border-radius: 50rpx;
   padding: 25rpx;
@@ -97,7 +97,7 @@ page {
   display: block;
   width: 90%;
   max-width: 400rpx;
-  box-shadow: 0 6rpx 15rpx rgba(0, 122, 255, 0.3);
+  box-shadow: 0 6rpx 15rpx rgba(245, 166, 35, 0.3);
 }
 
 .primary-btn:active {
@@ -107,19 +107,19 @@ page {
 
 .secondary-btn {
   background-color: #fff;
-  color: #007aff;
+  color: var(--primary-color);
   border-radius: 50rpx;
   padding: 25rpx;
   font-size: 32rpx;
   margin: 0 auto;
-  border: 1rpx solid #007aff;
+  border: 1rpx solid var(--primary-color);
   display: block;
   width: 90%;
   max-width: 400rpx;
 }
 
 .secondary-btn:active {
-  background-color: #f0f9ff;
+  background-color: #FFF5E6;
   transform: scale(0.98);
 }
 
@@ -137,7 +137,7 @@ page {
 }
 
 .text-accent {
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .bold {
@@ -229,9 +229,9 @@ page {
 }
 
 .input:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   background-color: #fff;
-  box-shadow: 0 0 0 2rpx rgba(0, 122, 255, 0.2);
+  box-shadow: 0 0 0 2rpx rgba(245, 166, 35, 0.2);
 }
 
 /* 页面内容区域，为底部导航留出空间 */

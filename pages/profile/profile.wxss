@@ -7,11 +7,11 @@
 
 .status-bar {
   width: 100%;
-  background-color: #D0F070;
+  background-color: #F5A623;
 }
 
 .custom-nav {
-  background-color: #D0F070;
+  background-color: #F5A623;
   padding: 20rpx 20rpx 30rpx;
   text-align: center;
 }
@@ -157,8 +157,8 @@
 }
 
 .share-btn {
-  background-color: #D0F070;
-  color: #000;
+  background: linear-gradient(135deg, #F5A623 0%, #E09000 100%);
+  color: #fff;
   border-radius: 8rpx;
   border: none;
   padding: 12rpx 24rpx;
@@ -181,7 +181,7 @@
 .share-button {
   width: 56rpx;
   height: 56rpx;
-  background-color: #D0F070;
+  background-color: #F5A623;
   border-radius: 8rpx;
   display: flex;
   justify-content: center;

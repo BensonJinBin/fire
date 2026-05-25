@@ -27,11 +27,11 @@
 }
 
 .nav-item.active {
-  color: #D0F070;
+  color: #F5A623;
 }
 
 .nav-item.active .nav-icon {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(44%) saturate(490%) hue-rotate(30deg) brightness(102%) contrast(88%) !important;
+  filter: brightness(0) saturate(100%) invert(74%) sepia(58%) saturate(571%) hue-rotate(359deg) brightness(97%) contrast(89%) !important;
 }
 
 .nav-item .nav-icon {
