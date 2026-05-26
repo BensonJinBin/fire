@@ -168,8 +168,7 @@ async function fetchLOFData(db) {
       return []
     }
     
-    // 使用云开发环境发起HTTP请求
-    const request = require('request-promise-native')
+    const fetch = require('node-fetch')
     const iconv = require('iconv-lite')
     
     // 获取当前日期
@@ -192,17 +191,17 @@ async function fetchLOFData(db) {
         const prefix = fundCode.startsWith('16') ? 'sz' : 'sh'
         const url = `https://qt.gtimg.cn/q=${prefix}${fundCode}`
         
-        const options = {
-          uri: url,
+        const response = await fetch(url, {
           headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
           },
-          encoding: null,
-          timeout: 5000  // 5秒超时
+          timeout: 5000
+        })
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${url}`)
         }
-        
-        const response = await request(options)
-        const data = iconv.decode(response, 'gbk')
+        const buffer = await response.buffer()
+        const data = iconv.decode(buffer, 'gbk')
         
         // 解析返回的数据
         // 格式: v_sz161226="国投白银LOF,现价,昨收,...,净值,..."
@@ -289,26 +288,27 @@ async function fetchLOFData(db) {
 // 获取申购状态
 async function fetchSubscriptionStatus(fundCode, fundName) {
   try {
-    const request = require('request-promise-native')
-    
+    const fetch = require('node-fetch')
+
     // 使用天天基金网接口获取申购状态
     const url = `https://fundf10.eastmoney.com/jjfl_${fundCode}.html`
-    
-    const options = {
-      uri: url,
+
+    const response = await fetch(url, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       },
       timeout: 5000
+    })
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${url}`)
     }
-    
-    const response = await request(options)
+    const text = await response.text()
     
     // 解析申购状态
     // 格式: <td class="w135">暂停申购</td> 或 <td class="w135">开放申购</td>
-    const subscriptionMatch = response.match(/申购状态<\/td><td[^>]*>([^<]+)<\/td>/)
-    const redemptionMatch = response.match(/赎回状态<\/td><td[^>]*>([^<]+)<\/td>/)
-    const dailyLimitMatch = response.match(/日累计申购限额<\/td><td[^>]*>([^<]+)<\/td>/)
+    const subscriptionMatch = text.match(/申购状态<\/td><td[^>]*>([^<]+)<\/td>/)
+    const redemptionMatch = text.match(/赎回状态<\/td><td[^>]*>([^<]+)<\/td>/)
+    const dailyLimitMatch = text.match(/日累计申购限额<\/td><td[^>]*>([^<]+)<\/td>/)
     
     const subscriptionStatus = subscriptionMatch ? subscriptionMatch[1] : '开放申购'
     const redemptionStatus = redemptionMatch ? redemptionMatch[1] : '开放赎回'
