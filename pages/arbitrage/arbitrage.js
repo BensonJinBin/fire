@@ -56,26 +56,25 @@ Page({
     }
   },
 
-  loadLOFData: function() {
-    wx.showLoading({
-      title: '加载中...'
-    });
+  loadLOFData: function(options = {}) {
+    if (!options.silent) {
+      wx.showLoading({ title: '加载中...' });
+    }
 
-    // 获取全局云开发实例
     const cloud = getApp().cloud;
     if (!cloud) {
-      wx.hideLoading();
+      if (!options.silent) wx.hideLoading();
       wx.showToast({
         title: '云开发未初始化',
         icon: 'none'
       });
       console.error('跨账号云开发实例未初始化');
-      return;
+      return Promise.resolve();
     }
 
     const db = cloud.database();
 
-    db.collection('funds')
+    return db.collection('funds')
       .where({
         is_listed: true
       })
@@ -137,12 +136,12 @@ Page({
           updateTime: this.formatUpdateTime(processedData[0]?.updated_at)
         });
 
-        wx.hideLoading();
+        if (!options.silent) wx.hideLoading();
       })
       .catch(err => {
         console.error('获取数据失败:', err);
         console.error('错误详情:', JSON.stringify(err));
-        wx.hideLoading();
+        if (!options.silent) wx.hideLoading();
         wx.showToast({
           title: '加载失败',
           icon: 'none',
@@ -165,12 +164,11 @@ Page({
 
   onPullDownRefresh: function() {
     this.setData({ refreshing: true });
-    
-    // 模拟网络请求延迟
-    setTimeout(() => {
-      this.loadLOFData();
+    this.loadLOFData({ silent: true }).then(() => {
       this.setData({ refreshing: false });
-    }, 1000);
+    }).catch(() => {
+      this.setData({ refreshing: false });
+    });
   },
 
   switchTab: function(e) {
