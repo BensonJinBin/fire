@@ -27,10 +27,8 @@ Page({
     retryCount = retryCount || 0;
     const cloud = getApp().cloud;
     if (cloud) {
-      console.log('云开发已初始化，开始加载数据');
       this.loadLOFData();
     } else if (retryCount < 50) {
-      console.log('等待云开发初始化...', retryCount);
       setTimeout(() => this.waitForCloudInit(retryCount + 1), 100);
     } else {
       console.error('云开发初始化超时');
@@ -40,28 +38,18 @@ Page({
 
   // 格式化更新时间
   formatUpdateTime: function(updatedAt) {
-    console.log('formatUpdateTime 接收到的参数:', updatedAt);
-    
     if (!updatedAt) {
-      console.log('updatedAt 为空，返回空字符串');
       return '';
     }
-    
+
     try {
       const date = new Date(updatedAt);
-      console.log('解析后的 Date 对象:', date);
-      console.log('Date 是否有效:', !isNaN(date.getTime()));
-      
       const month = date.getMonth() + 1;
       const day = date.getDate();
       const hours = date.getHours();
       const minutes = date.getMinutes();
-      
-      // 格式化为 "2月4日22:32"
-      const formatted = `${month}月${day}日${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-      console.log('格式化结果:', formatted);
-      
-      return formatted;
+
+      return `${month}月${day}日${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     } catch (error) {
       console.error('格式化时间失败:', error);
       return '';
@@ -85,10 +73,7 @@ Page({
       return;
     }
 
-    // 使用跨账号云开发实例
     const db = cloud.database();
-
-    console.log('开始查询数据库，使用跨账号云开发实例');
 
     db.collection('funds')
       .where({
@@ -96,7 +81,6 @@ Page({
       })
       .get()
       .then(res => {
-        console.log('数据库查询成功，返回数据:', res.data.length, '条');
         const cloudData = res.data || [];
 
         // 映射字段格式，并确保溢价率保持两位小数（字符串格式）
@@ -152,12 +136,8 @@ Page({
           lofList: this.filterData(processedData),
           updateTime: this.formatUpdateTime(processedData[0]?.updated_at)
         });
-        
-        console.log('第一条记录的 updated_at:', processedData[0]?.updated_at);
-        console.log('格式化后的更新时间:', this.formatUpdateTime(processedData[0]?.updated_at));
 
         wx.hideLoading();
-        console.log('数据加载完成，共', processedData.length, '只基金');
       })
       .catch(err => {
         console.error('获取数据失败:', err);
@@ -205,7 +185,6 @@ Page({
 
   onFundClick: function(e) {
     const fund = e.currentTarget.dataset.fund;
-    console.log('点击基金:', fund);
     // 可以在这里添加跳转到详情页的逻辑
   },
 
